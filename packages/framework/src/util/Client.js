@@ -1,5 +1,14 @@
 import fetch from 'node-fetch';
 
+export const API_ENDPOINT = 'https://scandipwa.shopware.store';
+
+/** @namespace Framework/Util/Client/getHref */
+export const getHref = (relativeUrl) => {
+    const url = new URL(relativeUrl, API_ENDPOINT);
+
+    return url.href;
+};
+
 /** @namespace Framework/Util/Client/Client */
 export class Client {
     _request(method, url, { body, headers } = {}) {
@@ -25,11 +34,19 @@ export class Client {
     }
 
     post(url, { body, headers } = {}) {
-        return this._request('POST', url, { body, headers });
+        return this._request(
+            'POST',
+            getHref(url),
+            { body, headers }
+        );
     }
 
     get(url, { headers } = {}) {
-        return this._request('GET', url, { headers });
+        return this._request(
+            'GET',
+            getHref(url),
+            { headers }
+        );
     }
 }
 
