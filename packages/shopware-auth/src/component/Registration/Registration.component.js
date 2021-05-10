@@ -18,7 +18,7 @@ export class RegistrationComponent extends PureComponent {
                     { collection.map((item) => {
                         const { value, displayName } = mapper(item);
 
-                        return <option value={ value }>{ displayName }</option>;
+                        return <option key={ value } value={ value }>{ displayName }</option>;
                     }) }
                 </select>
             </label>
