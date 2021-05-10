@@ -12,26 +12,23 @@ export const getHref = (relativeUrl) => {
 
 /** @namespace Framework/Util/Client/Client */
 export class Client {
-    _request(method, url, { body, headers } = {}) {
-        return fetch(url, {
+    async _request(method, url, { body, headers } = {}) {
+        const response = await fetch(url, {
             method,
             headers: {
                 'Content-Type': 'application/json',
                 ...headers
             },
             body: body ? JSON.stringify(body) : undefined
-        }).then(
-            /** @namespace Framework/Util/Client/fetch/then */
-            (res) => {
-                const json = res.json();
+        });
 
-                if (res.ok) {
-                    return json;
-                }
+        const json = await response.json();
 
-                throw json;
-            }
-        );
+        if (response.ok) {
+            return json;
+        }
+
+        throw json;
     }
 
     post(url, { body, headers } = {}) {
