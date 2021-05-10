@@ -1,10 +1,10 @@
 {
-    "name": "@scandipwa/cms",
+    "name": "@scandipwa/seo-url",
     "version": "0.0.0",
     "mosaic": {
         "type": "extension",
         "nextPages": {
-            "p/[...handle]": "server"
+            "[[...seoPathInfo]]": "server"
         }
     },
     "eslintConfig": {

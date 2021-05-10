@@ -22,15 +22,7 @@ export class Client {
             body: body ? JSON.stringify(body) : undefined
         }).then(
             /** @namespace Framework/Util/Client/fetch/then */
-            (res) => {
-                const json = res.json();
-
-                if (res.ok) {
-                    return json;
-                }
-
-                throw json;
-            }
+            (res) => res.json()
         );
     }
 
