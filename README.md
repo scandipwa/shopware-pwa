@@ -1,11 +1,11 @@
-- hompage // done
+- homepage // done
 - cms
 - auctions // done
 - graphics
 - bidding // done
 - auth // done
 
-# hompage
+# homepage
 
 - page layout // done
 - page // done
@@ -55,4 +55,5 @@
 - highest layout // done
 - form layout // done
 - bid layout integration into auction preview and view // done
-- allow to make a bid for logged in users only 
+- allow to make a bid for logged in users only
+  
