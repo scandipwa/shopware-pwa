@@ -4,7 +4,7 @@ import { PureComponent } from 'react';
 import Footer from '../Footer';
 import Header from '../Header';
 
-/** @namespace Sweet/Homepage/Component/Layout/Component/LayoutComponent */
+/** @namespace Layout/Component/Layout/Component/LayoutComponent */
 export class LayoutComponent extends PureComponent {
     static propTypes = {
         children: PropTypes.node.isRequired

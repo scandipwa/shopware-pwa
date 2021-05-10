@@ -1,7 +1,7 @@
 import { createSortedRenderMap } from '@scandipwa/framework/src/util/SortedMap';
 import { PureComponent } from 'react';
 
-/** @namespace Scandipwa/Homepage/Component/Footer/Component/FooterComponent */
+/** @namespace Layout/Component/Footer/Component/FooterComponent */
 export class FooterComponent extends PureComponent {
     content = createSortedRenderMap({});
 
