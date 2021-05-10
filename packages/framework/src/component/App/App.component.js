@@ -1,4 +1,4 @@
-import { createSortedMap } from '@sweet/framework/src/util/SortedMap';
+import { createSortedMap } from '@scandipwa/framework/src/util/SortedMap';
 import PropTypes from 'prop-types';
 import { PureComponent } from 'react';
 
