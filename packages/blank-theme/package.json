@@ -10,7 +10,8 @@
         "type": "theme",
         "extensions": {
             "@scandipwa/layout": true,
-            "@scandipwa/framework": true
+            "@scandipwa/framework": true,
+            "@scandipwa/shopware-auth": true
         }
     },
     "browserslist": {
