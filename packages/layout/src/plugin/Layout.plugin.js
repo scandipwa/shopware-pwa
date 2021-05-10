@@ -18,7 +18,7 @@ const renderLayout = (member) => {
 };
 
 export default {
-    'Sweet/Framework/Component/App/Component/AppComponent': {
+    'Framework/Component/App/Component/AppComponent': {
         'member-property': {
             contextProviders: renderLayout
         }
