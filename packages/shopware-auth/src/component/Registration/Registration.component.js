@@ -1,9 +1,14 @@
+import PropTypes from 'prop-types';
 import { PureComponent } from 'react';
 
 import RegistrationContext from './Registration.context';
 
 /** @namespace ShopwareAuth/Component/Registration/Component/RegistrationComponent */
 export class RegistrationComponent extends PureComponent {
+    static propTypes = {
+        handleSubmit: PropTypes.func.isRequired
+    };
+
     static contextType = RegistrationContext;
 
     renderSelectDropdown(name, collection, mapper) {
@@ -66,7 +71,6 @@ export class RegistrationComponent extends PureComponent {
                 { this.renderInput('street_address', 'Street address') }
                 { this.renderInput('postal_code', 'Postal code') }
                 { this.renderInput('city', 'City') }
-
                 { this.renderSelectDropdown(
                     'country',
                     countries,
@@ -80,8 +84,12 @@ export class RegistrationComponent extends PureComponent {
     }
 
     render() {
+        const { handleSubmit } = this.props;
+
         return (
-            <form onSubmit={ this.handleSubmit }>
+            <form
+              onSubmit={ handleSubmit }
+            >
                 { this.renderCustomerBlock() }
                 { this.renderAddressBlock() }
                 { /* TODO Shipping and billing addresses do not match */ }
