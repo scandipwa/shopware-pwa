@@ -1,0 +1,42 @@
+{
+    "name": "@scandipwa/blank-theme",
+    "version": "0.0.0",
+    "scripts": {
+        "dev": "nextjs-scripts dev",
+        "build": "nextjs-scripts build",
+        "start": "nextjs-scripts start"
+    },
+    "mosaic": {
+        "type": "theme",
+        "extensions": {
+            "@scandipwa/layout": true,
+            "@scandipwa/framework": true
+        }
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "eslintConfig": {
+        "extends": "@scandipwa",
+        "ignorePatterns": [
+            "build/**/*"
+        ]
+    },
+    "license": "OSL-3.0",
+    "publishConfig": {
+        "access": "public"
+    },
+    "dependencies": {
+        "@scandipwa/layout": "0.0.0",
+        "@scandipwa/framework": "0.0.0"
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "name": "@scandipwa/layout",
+    "version": "0.0.0",
+    "dependencies": {},
+    "mosaic": {
+        "type": "extension"
+    },
+    "eslintConfig": {
+        "extends": "@scandipwa"
+    }
+}
