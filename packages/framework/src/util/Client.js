@@ -1,6 +1,7 @@
 import fetch from 'node-fetch';
 
 export const API_ENDPOINT = 'https://scandipwa.shopware.store';
+export const SW_ACCESS_KEY = 'SWSCBHFSNTVMAWNZDNFKSHLAYW';
 
 /** @namespace Framework/Util/Client/getHref */
 export const getHref = (relativeUrl) => {
@@ -37,7 +38,10 @@ export class Client {
         return this._request(
             'POST',
             getHref(url),
-            { body, headers }
+            {
+                body,
+                headers: { 'sw-access-key': SW_ACCESS_KEY, ...headers }
+            }
         );
     }
 
@@ -45,7 +49,7 @@ export class Client {
         return this._request(
             'GET',
             getHref(url),
-            { headers }
+            { headers: { 'sw-access-key': SW_ACCESS_KEY, ...headers } }
         );
     }
 }
