@@ -9,6 +9,7 @@
     "mosaic": {
         "type": "theme",
         "extensions": {
+            "@scandipwa/cms": true,
             "@scandipwa/layout": true,
             "@scandipwa/framework": true
         }
@@ -36,6 +37,7 @@
         "access": "public"
     },
     "dependencies": {
+        "@scandipwa/cms": "0.0.0",
         "@scandipwa/framework": "0.0.0",
         "@scandipwa/layout": "0.0.0",
         "@tilework/mosaic": "^0.0.3",

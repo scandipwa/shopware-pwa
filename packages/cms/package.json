@@ -1,0 +1,13 @@
+{
+    "name": "@scandipwa/cms",
+    "version": "0.0.0",
+    "mosaic": {
+        "type": "extension",
+        "nextPages": {
+            "p/[...handle]": "server"
+        }
+    },
+    "eslintConfig": {
+        "extends": "@scandipwa"
+    }
+}
