@@ -3,7 +3,9 @@
     "name": "shopware-scandi-monorepo",
     "scripts": {
         "postinstall": "lerna bootstrap",
-        "clean": "lerna clean --yes"
+        "clean": "lerna clean --yes",
+        "lint": "eslint . --ext=js,jsx",
+        "lint:fix": "eslint . --ext=js,jsx --fix"
     },
     "devDependencies": {
         "@scandipwa/eslint-config": "^0.1.12",
