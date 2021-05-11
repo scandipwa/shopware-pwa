@@ -1,8 +1,10 @@
+import { createSortedRenderMap } from '@scandipwa/framework/src/util/SortedMap';
 import PropTypes from 'prop-types';
-import { PureComponent } from 'react';
+
+import RegistrationFormAbstract from './RegistrationForm.abstract.component';
 
 /** @namespace ShopwareAuth/Component/RegistrationForm/Component/RegistrationFormComponent */
-export class RegistrationFormComponent extends PureComponent {
+export class RegistrationFormComponent extends RegistrationFormAbstract {
     static propTypes = {
         handleSubmit: PropTypes.func.isRequired,
         handleChange: PropTypes.func.isRequired,
@@ -20,100 +22,58 @@ export class RegistrationFormComponent extends PureComponent {
         ).isRequired
     };
 
-    renderSelectDropdown(name, collection, mapper) {
-        const {
-            handleChange,
-            [name]: value
-        } = this.props;
+    fieldRenderMap = createSortedRenderMap([
+        this.renderCustomerBlock.bind(this),
+        this.renderAddressBlock.bind(this)
+    ]);
 
-        return (
-            <label htmlFor={ name }>
-                <select
-                  name={ name }
-                  // eslint-disable-next-line react/jsx-no-bind
-                  onChange={ (event) => handleChange(name, event.target.value) }
-                  value={ value }
-                >
-                    { collection.map((item) => {
-                        const { value, displayName } = mapper(item);
+    addressBlockFields = createSortedRenderMap([
+        this.renderInput.bind(this, 'street_address', 'Street address'),
+        this.renderInput.bind(this, 'postal_code', 'Postal code'),
+        this.renderInput.bind(this, 'city', 'City'),
+        this.renderSelectDropdown.bind(
+            this,
+            'country',
+            // eslint-disable-next-line react/destructuring-assignment
+            this.props.countries,
+            (country) => ({
+                value: country.id,
+                displayName: country.translated.name
+            })
+        )
+    ]);
 
-                        return (
-                            <option
-                              key={ value }
-                              value={ value }
-                            >
-                                { displayName }
-                            </option>
-                        );
-                    }) }
-                </select>
-            </label>
-        );
-    }
-
-    renderInput(name, placeholder, type = 'text') {
-        const {
-            handleChange,
-            [name]: value
-        } = this.props;
-
-        return (
-            <label htmlFor={ name }>
-                <input
-                  type={ type }
-                  name={ name }
-                  placeholder={ placeholder }
-                  // eslint-disable-next-line react/jsx-no-bind
-                  onChange={ (event) => handleChange(name, event.target.value) }
-                  value={ value }
-                />
-            </label>
-        );
-    }
+    customerBlockFields = createSortedRenderMap([
+        this.renderSelectDropdown.bind(
+            this,
+            'salutationId',
+            // eslint-disable-next-line react/destructuring-assignment
+            this.props.salutations,
+            (salutation) => ({
+                value: salutation.id,
+                displayName: salutation.displayName
+            })
+        ),
+        this.renderInput.bind(this, 'firstName', 'First name'),
+        this.renderInput.bind(this, 'lastName', 'Last name'),
+        this.renderInput.bind(this, 'email', 'Email'),
+        this.renderInput.bind(this, 'password', 'Password', 'password')
+    ]);
 
     renderCustomerBlock() {
-        const {
-            salutations
-        } = this.props;
-
         return (
             <div className="RegistrationForm-CustomerBlock">
                 <p>I am a new customer</p>
-                { this.renderSelectDropdown(
-                    'salutationId',
-                    salutations,
-                    (salutation) => ({
-                        value: salutation.id,
-                        displayName: salutation.displayName
-                    })
-                ) }
-                { this.renderInput('firstName', 'First name') }
-                { this.renderInput('lastName', 'Last name') }
-                { this.renderInput('email', 'Email') }
-                { this.renderInput('password', 'Password', 'password') }
+                { this.customerBlockFields.render() }
             </div>
         );
     }
 
     renderAddressBlock() {
-        const {
-            countries
-        } = this.props;
-
         return (
             <div className="RegistrationForm-AddressBlock">
                 <p>Address</p>
-                { this.renderInput('street_address', 'Street address') }
-                { this.renderInput('postal_code', 'Postal code') }
-                { this.renderInput('city', 'City') }
-                { this.renderSelectDropdown(
-                    'country',
-                    countries,
-                    (country) => ({
-                        value: country.id,
-                        displayName: country.translated.name
-                    })
-                ) }
+                { this.addressBlockFields.render() }
             </div>
         );
     }
@@ -126,8 +86,7 @@ export class RegistrationFormComponent extends PureComponent {
               onSubmit={ handleSubmit }
               className="RegistrationForm"
             >
-                { this.renderCustomerBlock() }
-                { this.renderAddressBlock() }
+                { this.fieldRenderMap.render() }
                 { /* TODO Shipping and billing addresses do not match */ }
                 <button type="submit">Continue</button>
             </form>
