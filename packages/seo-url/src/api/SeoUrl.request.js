@@ -1,6 +1,6 @@
 import Client from '@scandipwa/framework/src/util/Client';
 
-/** @namespace Cms/Api/SeoUrl/Request/getSeoUrlBySeoPathInfo */
+/** @namespace SeoUrl/Api/SeoUrl/Request/getSeoUrlBySeoPathInfo */
 export const getSeoUrlBySeoPathInfo = async (seoPathInfo) => {
     const { elements } = await Client.post('/store-api/seo-url', {
         body: {
