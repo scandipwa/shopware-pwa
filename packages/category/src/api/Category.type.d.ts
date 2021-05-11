@@ -1,3 +1,5 @@
+import { CmsPage, Media } from './Page.type';
+
 export interface Category {
     id: string
     parentId?: string
@@ -9,14 +11,14 @@ export interface Category {
     active: boolean
     childCount: number
     displayNestedProducts: boolean
-    parent?: CategoryType
-    children?: CategoryType
+    parent?: Category
+    children?: Category
     translations?: string
-    media: Record<string, unknown> // separate type https://shopware.stoplight.io/docs/store-api/storeapi.json/paths/~1category/post
+    media?: Media
     afterCategoryId?: string
     customFields: Record<string, unknown>
     cmsPageId: string
-    cmsPage?: string
+    cmsPage?: CmsPage
     externalLink?: string
     visible: boolean
     type: string
