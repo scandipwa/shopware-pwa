@@ -36,7 +36,7 @@ Example:
 
 // make sure this is inside of filtering context
 
-- products lists
+- products list
 - aggregations
 - sorting options
 - price information
