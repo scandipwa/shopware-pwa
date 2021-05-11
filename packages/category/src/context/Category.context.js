@@ -2,9 +2,9 @@
 import { createContext } from 'react';
 
 /**
- * @type {import('react').Context<{ page?: import('../api/Page.type').PwaPageResult }>}
+ * @type {import('react').Context<{ category?: import('../api/Category.type').Category }>}
  */
-const CategoryContext = createContext({ page: {} });
-CategoryContext.displayName = 'CategoryPageContext';
+const CategoryContext = createContext({ category: {} });
+CategoryContext.displayName = 'CategoryContext';
 
 export default CategoryContext;

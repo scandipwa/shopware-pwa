@@ -1,5 +1,46 @@
 /* eslint-disable @scandipwa/scandipwa-guidelines/jsx-no-props-destruction */
 
+import PropTypes from 'prop-types';
+import { createElement, PureComponent } from 'react';
+
+/** @namespace Framework/Util/Context/ContextProvider */
+export class ContextProvider extends PureComponent {
+    static propTypes = {
+        children: PropTypes.node.isRequired,
+        provider: PropTypes.node.isRequired
+    };
+
+    getContextValue() {
+        return {};
+    }
+
+    render() {
+        const { children, provider } = this.props;
+
+        return createElement(
+            provider,
+            {
+                value: this.getContextValue()
+            },
+            children
+        );
+    }
+}
+
+/** @namespace Framework/Util/Context/withProvider */
+export const withProvider = (ProviderComponent, ContextProvider) => {
+    const withComponent = (props) => (
+        <ProviderComponent
+          { ...props }
+          provider={ ContextProvider }
+        />
+    );
+
+    withComponent.displayName = 'withContexts';
+
+    return withComponent;
+};
+
 /** @namespace Framework/Util/Context/withContexts */
 export const withContexts = (Component, contextOrContexts = []) => {
     const withComponent = (props) => {

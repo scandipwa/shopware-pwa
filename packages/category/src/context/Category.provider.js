@@ -1,30 +1,23 @@
 /* eslint-disable react/destructuring-assignment */
 import PropTypes from 'prop-types';
-import { PureComponent } from 'react';
 
-import CategoryPageContext from './CategoryPage.context';
+import { ContextProvider, withProvider } from '../../../framework/src/util/Context';
+import CategoryContext from './Category.context';
 
 /** @namespace Category/Context/Category/Provider/CategoryProvider */
-export class CategoryProvider extends PureComponent {
+export class CategoryProvider extends ContextProvider {
     static propTypes = {
-        children: PropTypes.node.isRequired,
-        page: PropTypes.shape({}).isRequired
+        ...ContextProvider.propTypes,
+        category: PropTypes.shape({}).isRequired
     };
 
     getContextValue() {
-        const { page } = this.props;
-        return { page };
-    }
-
-    render() {
-        const { children } = this.props;
-
-        return (
-            <CategoryPageContext.Provider value={ this.getContextValue() }>
-                { children }
-            </CategoryPageContext.Provider>
-        );
+        const { category } = this.props;
+        return {
+            ...super.getContextValue(),
+            category
+        };
     }
 }
 
-export default CategoryProvider;
+export default withProvider(CategoryProvider, CategoryContext.Provider);
