@@ -1,0 +1,13 @@
+{
+    "name": "@scandipwa/seo-url",
+    "version": "0.0.0",
+    "mosaic": {
+        "type": "extension",
+        "nextPages": {
+            "[[...seoPathInfo]]": "server"
+        }
+    },
+    "eslintConfig": {
+        "extends": "@scandipwa"
+    }
+}
