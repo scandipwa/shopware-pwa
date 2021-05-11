@@ -17,12 +17,14 @@ export class RegistrationFormComponent extends PureComponent {
                 id: PropTypes.string,
                 translated: PropTypes.shape({ name: PropTypes.string })
             })
-        ).isRequired,
-        enteredValues: PropTypes.shape({}).isRequired
+        ).isRequired
     };
 
     renderSelectDropdown(name, collection, mapper) {
-        const { handleChange, enteredValues } = this.props;
+        const {
+            handleChange,
+            [name]: value
+        } = this.props;
 
         return (
             <label htmlFor={ name }>
@@ -30,7 +32,7 @@ export class RegistrationFormComponent extends PureComponent {
                   name={ name }
                   // eslint-disable-next-line react/jsx-no-bind
                   onChange={ (event) => handleChange(name, event.target.value) }
-                  value={ enteredValues[name] }
+                  value={ value }
                 >
                     { collection.map((item) => {
                         const { value, displayName } = mapper(item);
@@ -52,9 +54,7 @@ export class RegistrationFormComponent extends PureComponent {
     renderInput(name, placeholder, type = 'text') {
         const {
             handleChange,
-            enteredValues: {
-                [name]: value
-            }
+            [name]: value
         } = this.props;
 
         return (
@@ -77,18 +77,18 @@ export class RegistrationFormComponent extends PureComponent {
         } = this.props;
 
         return (
-            <div>
+            <div className="RegistrationForm-CustomerBlock">
+                <p>I am a new customer</p>
                 { this.renderSelectDropdown(
-                    'salutation',
+                    'salutationId',
                     salutations,
                     (salutation) => ({
                         value: salutation.id,
                         displayName: salutation.displayName
                     })
                 ) }
-
-                { this.renderInput('first_name', 'First name') }
-                { this.renderInput('last_name', 'Last name') }
+                { this.renderInput('firstName', 'First name') }
+                { this.renderInput('lastName', 'Last name') }
                 { this.renderInput('email', 'Email') }
                 { this.renderInput('password', 'Password', 'password') }
             </div>
@@ -101,7 +101,8 @@ export class RegistrationFormComponent extends PureComponent {
         } = this.props;
 
         return (
-            <div>
+            <div className="RegistrationForm-AddressBlock">
+                <p>Address</p>
                 { this.renderInput('street_address', 'Street address') }
                 { this.renderInput('postal_code', 'Postal code') }
                 { this.renderInput('city', 'City') }
@@ -123,6 +124,7 @@ export class RegistrationFormComponent extends PureComponent {
         return (
             <form
               onSubmit={ handleSubmit }
+              className="RegistrationForm"
             >
                 { this.renderCustomerBlock() }
                 { this.renderAddressBlock() }
