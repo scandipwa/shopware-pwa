@@ -2,6 +2,7 @@
 import PropTypes from 'prop-types';
 import { PureComponent } from 'react';
 
+import { register } from '../../api/Auth.request';
 import AuthContext from './Auth.context';
 
 /** @namespace ShopwareAuth/Context/Auth/Provider/AuthProvider */
@@ -12,9 +13,7 @@ export class AuthProvider extends PureComponent {
         children: PropTypes.node.isRequired
     };
 
-    register = async (formData) => {
-        console.log(formData);
-    };
+    register = register;
 
     getContextValue = () => ({
         register: this.register.bind(this)
