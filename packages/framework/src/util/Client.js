@@ -1,5 +1,7 @@
 import fetch from 'node-fetch';
 
+import BrowserDatabase from './BrowserDatabase';
+
 export const API_ENDPOINT = 'https://scandipwa.shopware.store';
 export const SW_ACCESS_KEY = 'SWSCBHFSNTVMAWNZDNFKSHLAYW';
 
@@ -12,12 +14,20 @@ export const getHref = (relativeUrl) => {
 
 /** @namespace Framework/Util/Client/Client */
 export class Client {
+    baseHeaders = {
+        'Content-Type': 'application/json',
+        'sw-access-key': SW_ACCESS_KEY
+    };
+
+    // TODO add sw-context-token to the headers from a plugin
     async _request(method, url, { body, headers } = {}) {
+        const contextToken = BrowserDatabase.getItem('sw-context-token');
+
         const response = await fetch(url, {
             method,
             headers: {
-                'Content-Type': 'application/json',
-                'sw-access-key': SW_ACCESS_KEY,
+                ...this.baseHeaders,
+                'sw-context-token': contextToken,
                 ...headers
             },
             body: body ? JSON.stringify(body) : undefined
