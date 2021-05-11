@@ -43,5 +43,5 @@ export interface Category {
     extensions: Record<string, unknown>
     parentVersionId?: string
     afterCategoryVersionId?: string
-    apiAlias: string
+    apiAlias: 'category'
 }
