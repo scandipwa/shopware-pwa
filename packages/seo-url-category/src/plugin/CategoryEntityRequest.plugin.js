@@ -9,7 +9,7 @@ const addCategoryEntityProps = async (args, callback) => {
         !originalProps.seoUrl
         || originalProps.seoUrl.routeName !== CATEGORY_ENTITY_TYPE
     ) {
-        return originalProps;
+        return { props: originalProps };
     }
 
     const category = await getCategoryById(originalProps.seoUrl.foreignKey);
