@@ -1,4 +1,5 @@
 /* eslint-disable react/no-unused-state */
+import BrowserDatabase from '@scandipwa/framework/src/util/BrowserDatabase';
 import PropTypes from 'prop-types';
 import { PureComponent } from 'react';
 
@@ -14,8 +15,12 @@ export class ShopwareContextProvider extends PureComponent {
     };
 
     async componentDidMount() {
-        console.log('Context provider mounted!');
         const context = await getShopwareContext();
+
+        BrowserDatabase.setItem(
+            'sw-context-token',
+            context.token
+        );
 
         this.setState({
             ...context
