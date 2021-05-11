@@ -49,7 +49,9 @@ export class RegistrationFormContainer extends HigherOrderComponent {
     }
 
     handleSubmit(event) {
-        const { [AuthContext.displayName]: { register } } = this.props;
+        const {
+            [AuthContext.displayName]: { register }
+        } = this.props;
 
         event.preventDefault();
 
@@ -58,6 +60,9 @@ export class RegistrationFormContainer extends HigherOrderComponent {
 }
 
 export default withHOC(
-    withContexts(RegistrationFormContainer, AuthContext),
+    withContexts(
+        RegistrationFormContainer,
+        [AuthContext]
+    ),
     RegistrationComponent
 );
