@@ -1,24 +1,48 @@
 import PropTypes from 'prop-types';
 import { PureComponent } from 'react';
 
-import RegistrationContext from './RegistrationForm.context';
-
 /** @namespace ShopwareAuth/Component/RegistrationForm/Component/RegistrationFormComponent */
 export class RegistrationFormComponent extends PureComponent {
     static propTypes = {
-        handleSubmit: PropTypes.func.isRequired
+        handleSubmit: PropTypes.func.isRequired,
+        handleChange: PropTypes.func.isRequired,
+        salutations: PropTypes.arrayOf(
+            PropTypes.shape({
+                id: PropTypes.string,
+                displayName: PropTypes.string
+            })
+        ).isRequired,
+        countries: PropTypes.arrayOf(
+            PropTypes.shape({
+                id: PropTypes.string,
+                translated: PropTypes.shape({ name: PropTypes.string })
+            })
+        ).isRequired,
+        enteredValues: PropTypes.shape({}).isRequired
     };
 
-    static contextType = RegistrationContext;
-
     renderSelectDropdown(name, collection, mapper) {
+        const { handleChange, enteredValues } = this.props;
+
         return (
             <label htmlFor={ name }>
-                <select name={ name }>
+                <select
+                  name={ name }
+                  // eslint-disable-next-line react/jsx-no-bind
+                  onChange={ (event) => handleChange(name, event.target.value) }
+                  value={ enteredValues[name] }
+                >
                     { collection.map((item) => {
                         const { value, displayName } = mapper(item);
 
-                        return <option key={ value } value={ value }>{ displayName }</option>;
+                        return (
+                            <option
+                              key={ value }
+                              value={ value }
+                            >
+                                { displayName }
+                            </option>
+                        );
                     }) }
                 </select>
             </label>
@@ -26,12 +50,22 @@ export class RegistrationFormComponent extends PureComponent {
     }
 
     renderInput(name, placeholder, type = 'text') {
+        const {
+            handleChange,
+            enteredValues: {
+                [name]: value
+            }
+        } = this.props;
+
         return (
             <label htmlFor={ name }>
                 <input
                   type={ type }
                   name={ name }
                   placeholder={ placeholder }
+                  // eslint-disable-next-line react/jsx-no-bind
+                  onChange={ (event) => handleChange(name, event.target.value) }
+                  value={ value }
                 />
             </label>
         );
@@ -40,7 +74,7 @@ export class RegistrationFormComponent extends PureComponent {
     renderCustomerBlock() {
         const {
             salutations
-        } = this.context;
+        } = this.props;
 
         return (
             <div>
@@ -64,7 +98,7 @@ export class RegistrationFormComponent extends PureComponent {
     renderAddressBlock() {
         const {
             countries
-        } = this.context;
+        } = this.props;
 
         return (
             <div>

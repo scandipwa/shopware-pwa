@@ -1,1 +1,1 @@
-export { default } from './Registration.container';
+export { default } from './RegistrationForm.container';
