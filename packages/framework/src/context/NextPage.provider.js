@@ -1,30 +1,24 @@
 import PropTypes from 'prop-types';
-import { PureComponent } from 'react';
 
+import { ContextProvider, withProvider } from '../util/Context';
 import NextPageContext from './NextPage.context';
 
 /** @namespace Framework/Context/NextPage/Provider/NextPageProvider */
-export class NextPageProvider extends PureComponent {
+export class NextPageProvider extends ContextProvider {
     static propTypes = {
+        ...ContextProvider.propTypes,
         // TODO: Figure out a way to dinamically declare prop types
-        props: PropTypes.shape({}).isRequired,
-        children: PropTypes.node.isRequired
+        props: PropTypes.shape({}).isRequired
     };
 
     getContextValue() {
         const { props } = this.props;
-        return { props };
-    }
 
-    render() {
-        const { children } = this.props;
-
-        return (
-            <NextPageContext.Provider value={ this.getContextValue() }>
-                { children }
-            </NextPageContext.Provider>
-        );
+        return {
+            ...super.getContextValue(),
+            props
+        };
     }
 }
 
-export default NextPageProvider;
+export default withProvider(NextPageProvider, NextPageContext.Provider);
