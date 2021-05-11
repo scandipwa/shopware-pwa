@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import { PureComponent } from 'react';
 
-import RegistrationContext from './Registration.context';
+import RegistrationContext from './RegistrationForm.context';
 
-/** @namespace ShopwareAuth/Component/Registration/Component/RegistrationComponent */
-export class RegistrationComponent extends PureComponent {
+/** @namespace ShopwareAuth/Component/RegistrationForm/Component/RegistrationFormComponent */
+export class RegistrationFormComponent extends PureComponent {
     static propTypes = {
         handleSubmit: PropTypes.func.isRequired
     };
@@ -99,4 +99,4 @@ export class RegistrationComponent extends PureComponent {
     }
 }
 
-export default RegistrationComponent;
+export default RegistrationFormComponent;

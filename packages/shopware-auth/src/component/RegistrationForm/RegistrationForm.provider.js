@@ -3,10 +3,10 @@ import client from '@scandipwa/framework/src/util/Client';
 import PropTypes from 'prop-types';
 import { PureComponent } from 'react';
 
-import RegistrationContext from './Registration.context';
+import RegistrationContext from './RegistrationForm.context';
 
-/** @namespace ShopwareAuth/Component/Registration/Provider/RegistrationProvider */
-export class RegistrationProvider extends PureComponent {
+/** @namespace ShopwareAuth/Component/RegistrationForm/Provider/RegistrationFormProvider */
+export class RegistrationFormProvider extends PureComponent {
     state = {
         countries: [],
         salutations: [],
@@ -63,4 +63,4 @@ export class RegistrationProvider extends PureComponent {
     }
 }
 
-export default RegistrationProvider;
+export default RegistrationFormProvider;

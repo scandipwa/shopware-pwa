@@ -3,8 +3,8 @@ import { PureComponent } from 'react';
 import RegistrationComponent from './Registration.component';
 import RegistrationProvider from './Registration.provider';
 
-/** @namespace ShopwareAuth/Component/Registration/Container/RegistrationContainer */
-export class RegistrationContainer extends PureComponent {
+/** @namespace ShopwareAuth/Component/RegistrationForm/Container/RegistrationFormContainer */
+export class RegistrationFormContainer extends PureComponent {
     containerFunctions = {
         handleSubmit: this.handleSubmit.bind(this)
     };
@@ -24,4 +24,4 @@ export class RegistrationContainer extends PureComponent {
     }
 }
 
-export default RegistrationContainer;
+export default RegistrationFormContainer;
