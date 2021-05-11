@@ -7,7 +7,8 @@ import { createElement, PureComponent } from 'react';
 export class ContextProvider extends PureComponent {
     static propTypes = {
         children: PropTypes.node.isRequired,
-        provider: PropTypes.node.isRequired
+        // eslint-disable-next-line react/forbid-prop-types
+        provider: PropTypes.any.isRequired
     };
 
     getContextValue() {

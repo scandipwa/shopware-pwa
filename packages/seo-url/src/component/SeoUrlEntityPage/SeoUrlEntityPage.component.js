@@ -4,8 +4,7 @@ import { PureComponent } from 'react';
 /** @namespace SeoUrl/Component/SeoUrlEntityPage/Component/SeoUrlEntityPageComponent */
 export class SeoUrlEntityPageComponent extends PureComponent {
     static propTypes = {
-        routeName: PropTypes.string.isRequired,
-        foreignKey: PropTypes.string.isRequired
+        routeName: PropTypes.string.isRequired
     };
 
     routeNameComponentMap = {
@@ -20,7 +19,7 @@ export class SeoUrlEntityPageComponent extends PureComponent {
     }
 
     render() {
-        const { routeName, foreignKey } = this.props;
+        const { routeName } = this.props;
         const EntityPage = this.routeNameComponentMap[routeName];
 
         if (!EntityPage) {
@@ -28,7 +27,7 @@ export class SeoUrlEntityPageComponent extends PureComponent {
         }
 
         return (
-            <EntityPage id={ foreignKey } />
+            <EntityPage />
         );
     }
 }

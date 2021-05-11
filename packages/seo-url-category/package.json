@@ -1,0 +1,16 @@
+{
+    "name": "@scandipwa/seo-url-category",
+    "version": "0.0.0",
+    "mosaic": {
+        "type": "extension",
+        "extensions": {
+            "@scandipwa/category": true
+        }
+    },
+    "dependencies": {
+        "@scandipwa/category": "0.0.0"
+    },
+    "eslintConfig": {
+        "extends": "@scandipwa"
+    }
+}

@@ -11,7 +11,8 @@
         "extensions": {
             "@scandipwa/seo-url": true,
             "@scandipwa/layout": true,
-            "@scandipwa/framework": true
+            "@scandipwa/framework": true,
+            "@scandipwa/seo-url-category": true
         }
     },
     "browserslist": {
@@ -37,6 +38,7 @@
         "access": "public"
     },
     "dependencies": {
+        "@scandipwa/seo-url-category": "0.0.0",
         "@scandipwa/seo-url": "0.0.0",
         "@scandipwa/framework": "0.0.0",
         "@scandipwa/layout": "0.0.0",

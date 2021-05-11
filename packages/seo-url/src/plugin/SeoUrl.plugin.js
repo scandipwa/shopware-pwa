@@ -1,23 +1,27 @@
+import NextPageProvider from '@scandipwa/framework/src/context/NextPage.provider';
+
 import { getSeoUrlBySeoPathInfo } from '../api/SeoUrl.request';
 import NotFoundPage from '../component/NotFoundPage';
 import SeoUrlEntityPage from '../component/SeoUrlEntityPage';
 
-const addRenderSeoUrlEntityPage = ([{
-    seoUrl: {
-        routeName,
-        foreignKey
-    } = {},
-    isNotFound
-}]) => {
+const addRenderSeoUrlEntityPage = ([props]) => {
+    const {
+        seoUrl: {
+            routeName
+        } = {},
+        isNotFound
+    } = props;
+
     if (isNotFound) {
         return <NotFoundPage />;
     }
 
     return (
-    <SeoUrlEntityPage
-      foreignKey={ foreignKey }
-      routeName={ routeName }
-    />
+        <NextPageProvider props={ props }>
+            <SeoUrlEntityPage
+              routeName={ routeName }
+            />
+        </NextPageProvider>
     );
 };
 
