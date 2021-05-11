@@ -11,7 +11,7 @@ export class CategoryPageComponent extends PureComponent {
 
         return (
             <Category
-              categry={ category }
+              category={ category }
             />
         );
     }
