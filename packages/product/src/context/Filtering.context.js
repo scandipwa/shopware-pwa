@@ -1,10 +1,17 @@
 /* eslint-disable @scandipwa/scandipwa-guidelines/export-level-one */
 import { createContext } from 'react';
 
-/**
- * @type {import('react').Context<{ filters?: {} }>}
- */
-const FilteringContext = createContext({ filters: {} });
+import { DEFAULT_LIMIT } from '../api/Product.request';
+
+const FilteringContext = createContext({
+    filter: [],
+    postFilter: [],
+    sort: [],
+    aggregations: [],
+    limit: DEFAULT_LIMIT,
+    page: 1
+});
+
 FilteringContext.displayName = 'FilteringContext';
 
 export default FilteringContext;
