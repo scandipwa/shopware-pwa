@@ -12,7 +12,8 @@
             "@scandipwa/seo-url": true,
             "@scandipwa/layout": true,
             "@scandipwa/framework": true,
-            "@scandipwa/seo-url-category": true
+            "@scandipwa/seo-url-category": true,
+            "@scandipwa/cms": true
         }
     },
     "browserslist": {
@@ -38,6 +39,7 @@
         "access": "public"
     },
     "dependencies": {
+        "@scandipwa/cms": "0.0.0",
         "@scandipwa/seo-url-category": "0.0.0",
         "@scandipwa/seo-url": "0.0.0",
         "@scandipwa/framework": "0.0.0",

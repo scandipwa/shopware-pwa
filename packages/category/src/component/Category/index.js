@@ -1,1 +1,1 @@
-export { default } from './Category.component';
+export { default } from './Category.container';
