@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { PureComponent } from 'react';
 
-/** @namespace Cms/Component/SeoUrlEntityPage/Component/SeoUrlEntityPageComponent */
+/** @namespace SeoUrl/Component/SeoUrlEntityPage/Component/SeoUrlEntityPageComponent */
 export class SeoUrlEntityPageComponent extends PureComponent {
     static propTypes = {
         routeName: PropTypes.string.isRequired,
