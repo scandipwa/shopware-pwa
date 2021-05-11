@@ -1,4 +1,4 @@
-import { fetchCountries, fetchSalutations } from '../util/Config';
+import { fetchCountries, fetchSalutations } from '../api/Config.request';
 
 const addCountries = async (args, callback) => {
     const { props } = await callback(...args);

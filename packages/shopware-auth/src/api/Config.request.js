@@ -1,13 +1,13 @@
 import client from '@scandipwa/framework/src/util/Client';
 
-/** @namespace ShopwareAuth/Util/Config/fetchCountries */
+/** @namespace ShopwareAuth/Api/Config/Request/fetchCountries */
 export const fetchCountries = async () => {
     const response = await client.get('/store-api/country');
 
     return response.elements;
 };
 
-/** @namespace ShopwareAuth/Util/Config/fetchSalutations */
+/** @namespace ShopwareAuth/Api/Config/Request/fetchSalutations */
 export const fetchSalutations = async () => {
     const response = await client.get('/store-api/salutation');
 
