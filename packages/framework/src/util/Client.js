@@ -17,6 +17,7 @@ export class Client {
             method,
             headers: {
                 'Content-Type': 'application/json',
+                'sw-access-key': SW_ACCESS_KEY,
                 ...headers
             },
             body: body ? JSON.stringify(body) : undefined
@@ -35,10 +36,7 @@ export class Client {
         return this._request(
             'POST',
             getHref(url),
-            {
-                body,
-                headers: { 'sw-access-key': SW_ACCESS_KEY, ...headers }
-            }
+            { body, headers }
         );
     }
 
@@ -46,7 +44,7 @@ export class Client {
         return this._request(
             'GET',
             getHref(url),
-            { headers: { 'sw-access-key': SW_ACCESS_KEY, ...headers } }
+            { headers }
         );
     }
 }
