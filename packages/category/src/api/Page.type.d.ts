@@ -1,5 +1,5 @@
 /* eslint-disable no-use-before-define */
-import { CategoryType } from './Category.type';
+import { Category } from './Category.type';
 
 export interface Thumbnail {
     id: string
@@ -23,7 +23,6 @@ export interface Media {
         width: number
         height: number
     }
-    updatedAt: string
     alt?: string
     url: string
     fileName?: string
@@ -117,7 +116,7 @@ export interface CmsPage {
 }
 
 export interface PwaPageResult {
-    category: CategoryType
+    category: Category
     cmsPage: CmsPage
     breadcrumbs: string[]
     resourceType: string
