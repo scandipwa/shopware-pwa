@@ -1,5 +1,4 @@
 /* eslint-disable react/no-unused-state */
-import client from '@scandipwa/framework/src/util/Client';
 import PropTypes from 'prop-types';
 import { PureComponent } from 'react';
 
@@ -13,11 +12,19 @@ export class AuthProvider extends PureComponent {
         children: PropTypes.node.isRequired
     };
 
+    register = async (formData) => {
+        console.log(formData);
+    };
+
+    getContextValue = () => ({
+        register: this.register.bind(this)
+    });
+
     render() {
         const { children } = this.props;
 
         return (
-            <AuthContext.Provider value={ this.state }>
+            <AuthContext.Provider value={ this.getContextValue() }>
                 { children }
             </AuthContext.Provider>
         );
