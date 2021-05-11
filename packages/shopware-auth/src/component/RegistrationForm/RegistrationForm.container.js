@@ -7,14 +7,14 @@ import RegistrationComponent from './RegistrationForm.component';
 /** @namespace ShopwareAuth/Component/RegistrationForm/Container/RegistrationFormContainer */
 export class RegistrationFormContainer extends HigherOrderComponent {
     state = {
-        first_name: '',
-        last_name: '',
+        firstName: '',
+        lastName: '',
         email: '',
         password: '',
         street_address: '',
         postal_code: '',
         city: '',
-        salutation: '',
+        salutationId: '',
         country: ''
     };
 
@@ -22,6 +22,13 @@ export class RegistrationFormContainer extends HigherOrderComponent {
         handleChange: this.props[AuthContext.displayName].handleInputChange,
         handleSubmit: this.handleSubmit.bind(this)
     };
+
+    componentDidMount() {
+        const { salutations, countries } = this.props;
+
+        this.handleChange('salutationId', salutations[0].id);
+        this.handleChange('country', countries[0].id);
+    }
 
     containerProps = () => {
         const {
