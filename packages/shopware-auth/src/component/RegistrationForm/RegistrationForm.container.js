@@ -19,7 +19,7 @@ export class RegistrationFormContainer extends HigherOrderComponent {
     };
 
     containerFunctions = {
-        handleChange: this.props[AuthContext.displayName].handleInputChange,
+        handleChange: this.handleChange.bind(this),
         handleSubmit: this.handleSubmit.bind(this)
     };
 
@@ -39,7 +39,6 @@ export class RegistrationFormContainer extends HigherOrderComponent {
         return {
             salutations,
             countries,
-            handleChange: this.handleChange.bind(this),
             ...this.state
         };
     };

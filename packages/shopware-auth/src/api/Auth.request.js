@@ -16,3 +16,9 @@ export const register = (body) => {
         }
     );
 };
+
+/** @namespace ShopwareAuth/Api/Auth/Request/login */
+export const login = (body) => client.post(
+    '/store-api/account/login',
+    { body }
+);

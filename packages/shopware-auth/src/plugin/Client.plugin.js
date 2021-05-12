@@ -1,6 +1,8 @@
 /* eslint-disable no-param-reassign */
 import BrowserDatabase from '@scandipwa/framework/src/util/BrowserDatabase';
 
+export const CONTEXT_TOKEN_KEY = 'sw-context-token';
+
 // Add context token to the headers
 const _request = async (
     [method, url, { body, headers = {} }],
@@ -10,7 +12,7 @@ const _request = async (
 
     // Get the context token from the store and use it in the headers
     if (isBrowser) {
-        const contextToken = BrowserDatabase.getItem('sw-context-token');
+        const contextToken = BrowserDatabase.getItem(CONTEXT_TOKEN_KEY);
         headers['sw-context-token'] = contextToken;
     }
 
@@ -19,8 +21,11 @@ const _request = async (
 
     // Update the token with the one from the server
     if (isBrowser) {
-        const { 'sw-context-token': newContextToken } = response.headers;
-        BrowserDatabase.setItem('newContextToken', newContextToken);
+        const { [CONTEXT_TOKEN_KEY]: newContextToken } = response.headers;
+
+        if (newContextToken) {
+            BrowserDatabase.setItem(CONTEXT_TOKEN_KEY, newContextToken);
+        }
     }
 
     return response;
