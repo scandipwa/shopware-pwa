@@ -1,1 +1,1 @@
-export { default, default as Product } from './Product.container';
+export { default } from './Product.container';

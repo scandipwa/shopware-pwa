@@ -3,6 +3,10 @@ import { createElement, Fragment, PureComponent } from 'react';
 
 import { getClassNameFromCmsEntity, getStylesFromCmsEntity } from '../../util/cmsStyle';
 import CmsEntity from '../CmsEntity';
+import CmsSectionDefault from '../CmsSectionDefault';
+import { CMS_DEFAULT_SECTION_KEY } from '../CmsSectionDefault/CmsSectionDefault.config';
+import CmsSectionSidebar from '../CmsSectionSidebar';
+import { CMS_SIDEBAR_SECTION_KEY } from '../CmsSectionSidebar/CmsSectionSidebar.config';
 import CmsSlot from '../CmsSlot';
 
 /**
@@ -14,11 +18,14 @@ export class ContentFactoryComponent extends PureComponent {
         sections: PropTypes.arrayOf(PropTypes.shape({})).isRequired
     };
 
-    sectionTypeComponentMap = {};
+    sectionTypeComponentMap = {
+        [CMS_DEFAULT_SECTION_KEY]: CmsSectionDefault,
+        [CMS_SIDEBAR_SECTION_KEY]: CmsSectionSidebar
+    };
 
     blockTypeComponentMap = {};
 
-    elementTypeComponentMap = {};
+    slotTypeComponentMap = {};
 
     renderEntity(component, entity, children = null) {
         const style = getStylesFromCmsEntity(entity);
@@ -37,7 +44,7 @@ export class ContentFactoryComponent extends PureComponent {
 
     renderSlot = (slot) => {
         const { type, _uniqueIdentifier } = slot;
-        const Component = this.elementTypeComponentMap[type] || CmsSlot;
+        const Component = this.slotTypeComponentMap[type] || CmsSlot;
 
         return (
             <Fragment key={ _uniqueIdentifier }>

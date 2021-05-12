@@ -10,10 +10,7 @@ import { createContext } from 'react';
  * }>}
  */
 const ProductContext = createContext({
-    products: [],
-    aggregations: {}
-    // sort: [],
-    // price: {}
+    products: []
 });
 
 ProductContext.displayName = 'CategoryContext';

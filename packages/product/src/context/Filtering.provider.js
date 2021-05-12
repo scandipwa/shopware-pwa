@@ -6,6 +6,10 @@ import { ContextProvider, withProvider } from '../../../framework/src/util/Conte
 import { DEFAULT_LIMIT } from '../api/Product.request';
 import FilteringContext from './Filtering.context';
 
+export const PAGE_PARAM_KEY = 'page';
+export const LIMIT_PARAM_KEY = 'limit';
+export const AGGREGATION_PARAM_KEY = 'aggregations';
+
 /** @namespace Product/Context/Filtering/Provider/FilteringProvider */
 export class FilteringProvider extends ContextProvider {
     state = {
@@ -17,12 +21,30 @@ export class FilteringProvider extends ContextProvider {
         page: 1
     };
 
-    supportedProperties = {
-        set page(value) {
+    __construct(props) {
+        super.__construct(props);
 
+        this.onHistoryChange();
+    }
+
+    supportedProperties = {
+        set [PAGE_PARAM_KEY](value) {
+            return this.setSearchParam(PAGE_PARAM_KEY, value);
         },
-        get page() {
-            return parseInt(searchParams.get('page'), 10);
+        get [PAGE_PARAM_KEY]() {
+            return parseInt(this.getSearchParam(PAGE_PARAM_KEY), 10);
+        },
+        set [LIMIT_PARAM_KEY](value) {
+            return this.setSearchParam(LIMIT_PARAM_KEY, value);
+        },
+        get [LIMIT_PARAM_KEY]() {
+            return parseInt(this.getSearchParam(LIMIT_PARAM_KEY), 10);
+        },
+        set [AGGREGATION_PARAM_KEY](value) {
+            return this.setSearchParam(AGGREGATION_PARAM_KEY, JSON.stringify(value));
+        },
+        get [AGGREGATION_PARAM_KEY]() {
+            return JSON.parse(this.getSearchParam(LIMIT_PARAM_KEY));
         }
     };
 
@@ -33,69 +55,27 @@ export class FilteringProvider extends ContextProvider {
      * 4. State updated => update the context
      */
 
-    setProperty(key, value) {
-
+    getSearchParam(key) {
+        const { router } = this.props;
+        return router.query[key];
     }
 
-    getSearchParams() {
+    setSearchParam(key, value) {
         const { router } = this.props;
+        router.query[key] = value;
+        router.push(router);
+    }
+
+    setProperty(key, value) {
+        this.supportedProperties[key] = value;
     }
 
     onHistoryChange() {
-        const {
-            // filter,
-            // postFilter,
-            // sort,
-            aggregations,
-            limit,
-            page
-        } = this.state;
-
-        const searchParams = new URLSearchParams(window.location.search.slice(1));
-        const updatedFilterState = {};
-
-        // TODO make a convertions with a objects from parsed strings
-
-        // if (compareObjects(searchParams.get('filter'), filter).isNotEqual()) {
-        //     updatedFilterState.filter = searchParams.get('filter');
-        // }
-
-        // if (compareObjects(searchParams.get('postFilter'), postFilter).isNotEqual()) {
-        //     updatedFilterState.postFilter = searchParams.get('postFilter');
-        // }
-
-        // if (compareObjects(searchParams.get('sort'), sort).isNotEqual()) {
-        //     updatedFilterState.sort = searchParams.get('sort');
-        // }
-
-        if (compareObjects(searchParams.get('aggregations'), aggregations).isNotEqual()) {
-            updatedFilterState.aggregations = searchParams.get('aggregations');
-        }
-
-        if (parseInt(searchParams.get('page'), 10) !== page) {
-            updatedFilterState.page = parseInt(searchParams.get('page'), 10);
-        }
-
-        if (parseInt(searchParams.get('limit'), 10) !== limit) {
-            updatedFilterState.limit = parseInt(searchParams.get('limit'), 10);
-        }
-
-        this.setState(updatedFilterState);
-    }
-
-    componentDidMount() {
-        window.addEventListener('popstate', this.onHistoryChange);
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener('popstate', this.onHistoryChange);
+        console.log(this.supportedProperties);
     }
 
     getContextValue() {
         const {
-            filter,
-            postFilter,
-            sort,
             aggregations,
             limit,
             page
@@ -103,9 +83,6 @@ export class FilteringProvider extends ContextProvider {
 
         return {
             ...super.getContextValue(),
-            filter,
-            postFilter,
-            sort,
             aggregations,
             limit,
             page

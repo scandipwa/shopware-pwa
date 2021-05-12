@@ -10,6 +10,7 @@
         "type": "theme",
         "extensions": {
             "@scandipwa/seo-url": true,
+            "@scandipwa/cms-product": true,
             "@scandipwa/layout": true,
             "@scandipwa/framework": true,
             "@scandipwa/seo-url-category": true,
@@ -51,6 +52,7 @@
         "@scandipwa/layout": "0.0.0",
         "@scandipwa/seo-url-product": "0.0.0",
         "@scandipwa/product": "0.0.0",
+        "@scandipwa/cms-product": "0.0.0",
         "@scandipwa/landing": "0.0.0",
         "@tilework/mosaic": "^0.0.3",
         "@tilework/mosaic-nextjs-scripts": "^0.0.5"
