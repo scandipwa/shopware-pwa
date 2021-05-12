@@ -1,16 +1,16 @@
 {
-    "name": "@scandipwa/seo-url-category",
+    "name": "@scandipwa/seo-url-landing",
     "version": "0.0.0",
     "mosaic": {
         "type": "extension",
         "extensions": {
-            "@scandipwa/category": true,
+            "@scandipwa/landing": true,
             "@scandipwa/seo-url": true
         }
     },
     "dependencies": {
-        "@scandipwa/category": "0.0.0",
-        "@scandipwa/seo-url": "0.0.0"
+        "@scandipwa/seo-url": "0.0.0",
+        "@scandipwa/landing": "0.0.0"
     },
     "eslintConfig": {
         "extends": "@scandipwa"

@@ -1,0 +1,1 @@
+- Inject CmsContentFactory in to the Landing page layout
