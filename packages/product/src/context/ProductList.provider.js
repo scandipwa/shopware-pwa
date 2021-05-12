@@ -8,10 +8,16 @@ import ProductListContext from './ProductList.context';
 export class ProductListProvider extends ContextProvider {
     static contextType = FilteringContext;
 
-    state = {
-        products: [],
-        isLoading: false
-    };
+    __construct(props) {
+        super.__construct(props);
+
+        const { productsResult } = this.props;
+
+        this.state = {
+            productsResult: productsResult || {},
+            isLoading: !productsResult
+        };
+    }
 
     async requestProductList() {
         /**
@@ -40,12 +46,12 @@ export class ProductListProvider extends ContextProvider {
     }
 
     getProducts() {
-        const { products: { elements } } = this.state;
+        const { productsResult: { elements } } = this.state;
         return elements;
     }
 
     getAggregations() {
-        const { products: { aggregations } } = this.state;
+        const { productsResult: { aggregations } } = this.state;
         return aggregations;
     }
 
