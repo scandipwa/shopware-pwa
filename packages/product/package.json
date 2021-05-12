@@ -1,4 +1,11 @@
 {
     "name": "@scandipwa/product",
-    "version": "0.0.0"
+    "version": "0.0.0",
+    "dependencies": {},
+    "mosaic": {
+        "type": "extension"
+    },
+    "eslintConfig": {
+        "extends": "@scandipwa"
+    }
 }
