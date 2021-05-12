@@ -1,10 +1,10 @@
 import { HigherOrderComponent, withHOC } from '@scandipwa/framework/src/util/HOC';
 
 import ProductProvider from '../../context/Product.provider';
-import ProductComponent from './Product.component';
+import ProductCardComponent from './ProductCard.component';
 
-/** @namespace Product/Component/Product/Container/ProductContainer */
-export class ProductContainer extends HigherOrderComponent {
+/** @namespace Product/Component/ProductCard/Container/ProductCardContainer */
+export class ProductCardContainer extends HigherOrderComponent {
     render() {
         const { product } = this.props;
 
@@ -16,4 +16,4 @@ export class ProductContainer extends HigherOrderComponent {
     }
 }
 
-export default withHOC(ProductContainer, ProductComponent);
+export default withHOC(ProductCardContainer, ProductCardComponent);
