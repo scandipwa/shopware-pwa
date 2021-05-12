@@ -14,14 +14,10 @@
             "@scandipwa/framework": true,
             "@scandipwa/seo-url-category": true,
             "@scandipwa/cms": true,
-<<<<<<< HEAD
             "@scandipwa/seo-url-product": true,
             "@scandipwa/product": true,
-            "@scandipwa/category-cms": true
-=======
             "@scandipwa/category-cms": true,
             "@scandipwa/landing": true
->>>>>>> ee5d4a3a561754c5c1706c0d64ac3e505c19436d
         }
     },
     "browserslist": {
