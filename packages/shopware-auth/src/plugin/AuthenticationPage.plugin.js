@@ -1,12 +1,12 @@
-import Registration from '../component/RegistrationForm';
+import AuthenticationPage from '../component/AuthenticationPage';
 
-const addRegisterPage = ([props]) => (
+const addAuthPage = ([props]) => (
     // eslint-disable-next-line @scandipwa/scandipwa-guidelines/jsx-no-props-destruction
-    <Registration { ...props } />
+    <AuthenticationPage { ...props } />
 );
 
 export default {
     'Pages/login/Page': {
-        function: addRegisterPage
+        function: addAuthPage
     }
 };

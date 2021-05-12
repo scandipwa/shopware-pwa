@@ -1,25 +1,16 @@
 import { createSortedRenderMap } from '@scandipwa/framework/src/util/SortedMap';
 import PropTypes from 'prop-types';
 
-import RegistrationFormAbstract from './RegistrationForm.abstract.component';
+import { CountriesType, SalutationsType } from '../../type/common';
+import RegistrationFormAbstract from '../AbstractForm';
 
 /** @namespace ShopwareAuth/Component/RegistrationForm/Component/RegistrationFormComponent */
 export class RegistrationFormComponent extends RegistrationFormAbstract {
     static propTypes = {
         handleSubmit: PropTypes.func.isRequired,
         handleChange: PropTypes.func.isRequired,
-        salutations: PropTypes.arrayOf(
-            PropTypes.shape({
-                id: PropTypes.string,
-                displayName: PropTypes.string
-            })
-        ).isRequired,
-        countries: PropTypes.arrayOf(
-            PropTypes.shape({
-                id: PropTypes.string,
-                translated: PropTypes.shape({ name: PropTypes.string })
-            })
-        ).isRequired
+        salutations: SalutationsType,
+        countries: CountriesType
     };
 
     fieldRenderMap = createSortedRenderMap([
