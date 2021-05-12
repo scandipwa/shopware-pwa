@@ -5,7 +5,8 @@
         "postinstall": "lerna bootstrap",
         "clean": "lerna clean --yes",
         "lint": "eslint . --ext=js,jsx",
-        "lint:fix": "eslint . --ext=js,jsx --fix"
+        "lint:fix": "eslint . --ext=js,jsx --fix",
+        "start": "npm explore @scandipwa/blank-theme -- npm run dev"
     },
     "devDependencies": {
         "@scandipwa/eslint-config": "^0.1.12",
