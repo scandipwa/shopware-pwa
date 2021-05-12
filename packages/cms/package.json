@@ -1,0 +1,10 @@
+{
+    "name": "@scandipwa/cms",
+    "version": "0.0.0",
+    "mosaic": {
+        "type": "extension"
+    },
+    "eslintConfig": {
+        "extends": "@scandipwa"
+    }
+}

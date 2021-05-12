@@ -13,6 +13,7 @@ export class CategoryProvider extends ContextProvider {
 
     getContextValue() {
         const { category } = this.props;
+
         return {
             ...super.getContextValue(),
             category
