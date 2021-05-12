@@ -14,9 +14,14 @@
             "@scandipwa/framework": true,
             "@scandipwa/seo-url-category": true,
             "@scandipwa/cms": true,
+<<<<<<< HEAD
             "@scandipwa/seo-url-product": true,
             "@scandipwa/product": true,
             "@scandipwa/category-cms": true
+=======
+            "@scandipwa/category-cms": true,
+            "@scandipwa/landing": true
+>>>>>>> ee5d4a3a561754c5c1706c0d64ac3e505c19436d
         }
     },
     "browserslist": {
@@ -50,6 +55,7 @@
         "@scandipwa/layout": "0.0.0",
         "@scandipwa/seo-url-product": "0.0.0",
         "@scandipwa/product": "0.0.0",
+        "@scandipwa/landing": "0.0.0",
         "@tilework/mosaic": "^0.0.3",
         "@tilework/mosaic-nextjs-scripts": "^0.0.5"
     }
