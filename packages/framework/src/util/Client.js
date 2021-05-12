@@ -33,6 +33,10 @@ export class Client {
             body: body ? JSON.stringify(body) : undefined
         });
 
+        return this.parseResponse(response);
+    }
+
+    async parseResponse(response) {
         const json = await response.json();
 
         if (response.ok) {
