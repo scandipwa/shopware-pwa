@@ -4,30 +4,40 @@ import { HigherOrderComponent, withHOC } from '@scandipwa/framework/src/util/HOC
 import { AuthContext } from '../../context/Auth';
 import LoginFormComponent from './LoginForm.component';
 
+export const INITIAL_LOGIN_FORM_STATE = {
+    username: '',
+    password: ''
+};
+
 /** @namespace ShopwareAuth/Component/LoginForm/Container/LoginFormContainer */
 export class LoginFormContainer extends HigherOrderComponent {
-    state = {
-        username: '',
-        password: ''
-    };
+    state = INITIAL_LOGIN_FORM_STATE;
 
     containerFunctions = {
         handleChange: this.handleChange.bind(this),
         handleSubmit: this.handleSubmit.bind(this)
     };
 
+    containerProps = () => this.state;
+
     handleChange(name, value) {
         this.setState({ [name]: value });
     }
 
-    handleSubmit(event) {
+    async handleSubmit(event) {
         const {
             [AuthContext.displayName]: { login }
         } = this.props;
 
         event.preventDefault();
 
-        login({ ...this.state });
+        const token = await login({ ...this.state });
+
+        if (!token) {
+            return;
+        }
+
+        this.setState(INITIAL_LOGIN_FORM_STATE);
     }
 }
 

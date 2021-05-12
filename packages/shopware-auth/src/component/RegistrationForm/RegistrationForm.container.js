@@ -4,19 +4,21 @@ import { HigherOrderComponent, withHOC } from '@scandipwa/framework/src/util/HOC
 import { AuthContext } from '../../context/Auth';
 import RegistrationComponent from './RegistrationForm.component';
 
+export const INITIAL_REGISTRATION_FORM_STATE = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    street: '',
+    zipcode: '',
+    city: '',
+    salutationId: '',
+    countryId: ''
+};
+
 /** @namespace ShopwareAuth/Component/RegistrationForm/Container/RegistrationFormContainer */
 export class RegistrationFormContainer extends HigherOrderComponent {
-    state = {
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: '',
-        street: '',
-        zipcode: '',
-        city: '',
-        salutationId: '',
-        countryId: ''
-    };
+    state = INITIAL_REGISTRATION_FORM_STATE;
 
     containerFunctions = {
         handleChange: this.handleChange.bind(this),
@@ -47,14 +49,18 @@ export class RegistrationFormContainer extends HigherOrderComponent {
         this.setState({ [name]: value });
     }
 
-    handleSubmit(event) {
+    async handleSubmit(event) {
         const {
             [AuthContext.displayName]: { register }
         } = this.props;
 
         event.preventDefault();
 
-        register({ ...this.state });
+        const customer = await register({ ...this.state });
+
+        if (customer) {
+            this.setState(INITIAL_REGISTRATION_FORM_STATE);
+        }
     }
 }
 

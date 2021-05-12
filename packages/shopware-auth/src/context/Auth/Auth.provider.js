@@ -38,10 +38,14 @@ export class AuthProvider extends PureComponent {
             const customer = register(body);
 
             this.setState({ customer });
+
+            return customer;
         } catch (error) {
             console.error(error);
             // TODO notify
         }
+
+        return null;
     };
 
     login = async (formData) => {
@@ -50,10 +54,14 @@ export class AuthProvider extends PureComponent {
 
             this.setState({ token });
             BrowserDatabase.setItem(CONTEXT_TOKEN_KEY, token);
+
+            return token;
         } catch (error) {
             console.error(error);
             // TODO notify
         }
+
+        return null;
     };
 
     getContextValue = () => ({
