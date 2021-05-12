@@ -13,7 +13,8 @@
             "@scandipwa/layout": true,
             "@scandipwa/framework": true,
             "@scandipwa/seo-url-category": true,
-            "@scandipwa/cms": true
+            "@scandipwa/cms": true,
+            "@scandipwa/category-cms": true
         }
     },
     "browserslist": {
@@ -40,6 +41,7 @@
     },
     "dependencies": {
         "@scandipwa/cms": "0.0.0",
+        "@scandipwa/category-cms": "0.0.0",
         "@scandipwa/seo-url-category": "0.0.0",
         "@scandipwa/seo-url": "0.0.0",
         "@scandipwa/framework": "0.0.0",
