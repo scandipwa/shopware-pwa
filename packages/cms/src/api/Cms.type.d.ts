@@ -44,6 +44,8 @@ export interface CmsMedia {
 }
 
 export interface SlotBase {
+    type: string
+    apiAlias: string
     slot: string
     block?: CmsBlock
     blockId: string
@@ -72,34 +74,38 @@ export interface SlotText extends SlotBase {
     data: CmsText
 }
 
+export interface CmsEntityInterface {
+    type: string
+    apiAlias: string
+    translated: string[]
+    createdAt: string
+    updatedAt: string
+    name?: string
+    backgroundColor?: string,
+    backgroundImage?: string
+    marginBottom?: string
+    marginLeft?: string
+    marginRight?: string
+    marginTop?: string
+}
+
 export type CmsSlot = SlotImage | SlotText
 
-export interface CmsBlock {
-    type: 'string'
+export interface CmsBlock extends CmsEntityInterface {
     slots: CmsSlot[]
     sectionId: string
     position: number
-    name?: string
-    // .. style props
     sectionPosition: string
-    translated: string[]
-    createdAt: string
-    updatedAt: string
 }
 
-export interface CmsSection {
+export interface CmsSection extends CmsEntityInterface {
     position: number
-    type: string
-    name?: string
     blocks: CmsBlock[]
     pageId: string
     page?: CmsPage
-    // ... style props
-
-    translated: string[]
-    createdAt: string
-    updatedAt: string
 }
+
+export type CmsEntity = CmsSection | CmsBlock;
 
 export interface CmsPage {
     id: string

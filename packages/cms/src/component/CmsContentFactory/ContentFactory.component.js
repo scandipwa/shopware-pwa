@@ -1,5 +1,9 @@
 import PropTypes from 'prop-types';
-import { Fragment, PureComponent } from 'react';
+import { createElement, Fragment, PureComponent } from 'react';
+
+import { getClassNameFromCmsEntity, getStylesFromCmsEntity } from '../../util/cmsStyle';
+import CmsEntity from '../CmsEntity';
+import CmsSlot from '../CmsSlot';
 
 /**
  * @augments {PureComponent<{sections: import('../../api/Cms.type').CmsSection[]}>}
@@ -10,47 +14,60 @@ export class ContentFactoryComponent extends PureComponent {
         sections: PropTypes.arrayOf(PropTypes.shape({})).isRequired
     };
 
-    sectionTypeRenderMap = {};
+    sectionTypeComponentMap = {};
 
-    blockTypeRenderMap = {};
+    blockTypeComponentMap = {};
 
-    elementTypeRenderMap = {};
+    elementTypeComponentMap = {};
 
-    renderFallback({ type }) {
-        return `This ${ type } is not supported.`;
+    renderEntity(component, entity, children = null) {
+        const style = getStylesFromCmsEntity(entity);
+        const className = getClassNameFromCmsEntity(entity);
+
+        return createElement(
+            component,
+            {
+                style,
+                className,
+                entity
+            },
+            children
+        );
     }
 
-    renderElement = (element) => {
-        const { type, _uniqueIdentifier } = element;
-        const elementRender = this.elementTypeRenderMap[type] || this.renderFallback;
+    renderSlot = (slot) => {
+        const { type, _uniqueIdentifier } = slot;
+        const Component = this.elementTypeComponentMap[type] || CmsSlot;
 
         return (
             <Fragment key={ _uniqueIdentifier }>
-                { elementRender(element) }
+                <Component
+                  slot={ slot }
+                />
             </Fragment>
         );
     };
 
     renderBlock = (block) => {
-        const { type, _uniqueIdentifier, elements } = block;
-        const blockRender = this.blockTypeRenderMap[type] || this.renderFallback;
-        const children = elements.map(this.renderElement);
+        const { type, _uniqueIdentifier, slots } = block;
+        const component = this.blockTypeComponentMap[type] || CmsEntity;
+        const children = slots.map(this.renderSlot);
 
         return (
             <Fragment key={ _uniqueIdentifier }>
-                { blockRender(block, children) }
+                { this.renderEntity(component, block, children) }
             </Fragment>
         );
     };
 
     renderSection = (section) => {
         const { type, _uniqueIdentifier, blocks } = section;
-        const sectionRenderer = this.sectionTypeRenderMap[type] || this.renderFallback;
+        const component = this.sectionTypeComponentMap[type] || CmsEntity;
         const children = blocks.map(this.renderBlock);
 
         return (
             <Fragment key={ _uniqueIdentifier }>
-                { sectionRenderer(section, children) }
+                { this.renderEntity(component, section, children) }
             </Fragment>
         );
     };
