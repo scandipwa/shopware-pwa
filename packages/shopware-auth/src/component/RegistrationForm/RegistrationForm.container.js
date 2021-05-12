@@ -11,11 +11,11 @@ export class RegistrationFormContainer extends HigherOrderComponent {
         lastName: '',
         email: '',
         password: '',
-        street_address: '',
-        postal_code: '',
+        street: '',
+        zipcode: '',
         city: '',
         salutationId: '',
-        country: ''
+        countryId: ''
     };
 
     containerFunctions = {
@@ -27,7 +27,7 @@ export class RegistrationFormContainer extends HigherOrderComponent {
         const { salutations, countries } = this.props;
 
         this.handleChange('salutationId', salutations[0].id);
-        this.handleChange('country', countries[0].id);
+        this.handleChange('countryId', countries[0].id);
     }
 
     containerProps = () => {

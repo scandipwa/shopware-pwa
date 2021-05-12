@@ -13,7 +13,34 @@ export class AuthProvider extends PureComponent {
         children: PropTypes.node.isRequired
     };
 
-    register = register;
+    register = async (formData) => {
+        const {
+            street,
+            zipcode,
+            countryId,
+            city,
+            ...customer
+        } = formData;
+
+        const body = {
+            billingAddress: {
+                street,
+                zipcode,
+                countryId,
+                city
+            },
+            ...customer
+        };
+
+        try {
+            const customer = register(body);
+
+            this.setState({ customer });
+        } catch (error) {
+            console.error(error);
+            // TODO notify
+        }
+    };
 
     getContextValue = () => ({
         register: this.register.bind(this)

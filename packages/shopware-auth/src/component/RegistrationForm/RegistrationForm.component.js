@@ -28,12 +28,12 @@ export class RegistrationFormComponent extends RegistrationFormAbstract {
     ]);
 
     addressBlockFields = createSortedRenderMap([
-        this.renderInput.bind(this, 'street_address', 'Street address'),
-        this.renderInput.bind(this, 'postal_code', 'Postal code'),
+        this.renderInput.bind(this, 'street', 'Street address'),
+        this.renderInput.bind(this, 'zipcode', 'Postal code'),
         this.renderInput.bind(this, 'city', 'City'),
         this.renderSelectDropdown.bind(
             this,
-            'country',
+            'countryId',
             // eslint-disable-next-line react/destructuring-assignment
             this.props.countries,
             (country) => ({
