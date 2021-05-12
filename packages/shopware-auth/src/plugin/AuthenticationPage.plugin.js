@@ -6,7 +6,7 @@ const addRegisterPage = ([props]) => (
 );
 
 export default {
-    'Pages/register/Page': {
+    'Pages/login/Page': {
         function: addRegisterPage
     }
 };

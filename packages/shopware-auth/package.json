@@ -6,7 +6,7 @@
   "mosaic": {
     "type": "extension",
     "nextPages": {
-      "register": "server"
+      "login": "server"
     }
   }
 }
