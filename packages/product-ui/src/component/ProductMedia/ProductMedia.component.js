@@ -13,20 +13,40 @@ export class ProductMediaComponent extends PureComponent {
         return this.context;
     }
 
-    renderThumbnail() {
-        const { product: { cover: { media: { thumbnails, translated: { title } } } } } = this.getContextValue();
+    /**
+     *
+     * @param {import('@scandipwa/product/src/api/Product.type').Thumbnail} thumbnail
+     */
+    renderThumbnail = (thumbnail) => (
+        <source
+          key={ thumbnail.id }
+          srcSet={ thumbnail.url }
+          width={ thumbnail.width }
+          height={ thumbnail.height }
+        />
+    );
 
-        const thumbnail = thumbnails.sort((a, b) => a.width - b.width).shift();
+    renderThumbnails() {
+        const { product: { cover: { media: { thumbnails, translated: { title } } } } } = this.getContextValue();
+        const smallThumbnail = thumbnails[thumbnails.length - 1];
 
         return (
-            <img src={ thumbnail.url } aria-label={ title } />
+            <picture>
+                { thumbnails.map(this.renderThumbnail) }
+                <img
+                  src={ smallThumbnail.url }
+                  width={ smallThumbnail.width }
+                  height={ smallThumbnail.height }
+                  alt={ title }
+                />
+            </picture>
         );
     }
 
     render() {
         return (
             <div>
-                { this.renderThumbnail() }
+                { this.renderThumbnails() }
             </div>
         );
     }

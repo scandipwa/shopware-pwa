@@ -26,7 +26,9 @@ export class ProductBreadcrumbComponent extends PureComponent {
 
         return (
             <div>
-                <ul style={ { display: 'flex', listStyleType: 'none', padding: 0 } }>{ breadcrumb.map(this.renderBreadCrumb) }</ul>
+                <ul style={ { display: 'flex', listStyleType: 'none', padding: 0 } }>
+                    { breadcrumb.map(this.renderBreadCrumb) }
+                </ul>
             </div>
         );
     }
