@@ -37,7 +37,9 @@ export class AuthProvider extends PureComponent {
         try {
             const customer = register(body);
 
-            this.setState({ customer });
+            const token = BrowserDatabase.getItem(CONTEXT_TOKEN_KEY);
+
+            this.setState({ customer, token });
 
             return customer;
         } catch (error) {
@@ -64,10 +66,15 @@ export class AuthProvider extends PureComponent {
         return null;
     };
 
-    getContextValue = () => ({
-        register: this.register.bind(this),
-        login: this.login.bind(this)
-    });
+    getContextValue = () => {
+        const { token } = this.state;
+
+        return {
+            register: this.register.bind(this),
+            login: this.login.bind(this),
+            token
+        };
+    };
 
     render() {
         const { children } = this.props;
