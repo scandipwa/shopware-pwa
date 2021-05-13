@@ -1,11 +1,27 @@
 /* eslint-disable react/no-unused-state */
+import NextPageContext from '@scandipwa/framework/src/context/NextPage.context';
 import BrowserDatabase from '@scandipwa/framework/src/util/BrowserDatabase';
+import { withContexts } from '@scandipwa/framework/src/util/Context';
 import PropTypes from 'prop-types';
 import { PureComponent } from 'react';
 
 import { login, register } from '../../api/Auth.request';
 import { CONTEXT_TOKEN_KEY } from '../../plugin/Client.plugin';
 import AuthContext from './Auth.context';
+
+/** @namespace ShopwareAuth/Context/Auth/Provider/getFakeGuestData */
+export const getFakeGuestData = (salutationId, countryId) => ({
+    billingAddress: {
+        street: '-',
+        zipcode: '-',
+        countryId,
+        city: '-'
+    },
+    email: 'guest@example.com',
+    salutationId,
+    firstName: 'Guest',
+    lastName: 'User'
+});
 
 /** @namespace ShopwareAuth/Context/Auth/Provider/AuthProvider */
 export class AuthProvider extends PureComponent {
@@ -17,6 +33,16 @@ export class AuthProvider extends PureComponent {
 
     register = async (formData) => {
         const {
+            [NextPageContext.displayName]: {
+                props: {
+                    countries,
+                    salutations
+                }
+            }
+        } = this.props;
+
+        const {
+            guest = false,
             street,
             zipcode,
             countryId,
@@ -31,11 +57,16 @@ export class AuthProvider extends PureComponent {
                 countryId,
                 city
             },
-            ...customer
+            ...customer,
+            ...(guest
+                ? getFakeGuestData(salutations[0].id, countries[0].id)
+                : {}
+            ),
+            guest
         };
 
         try {
-            const customer = register(body);
+            const customer = await register(body);
 
             const token = BrowserDatabase.getItem(CONTEXT_TOKEN_KEY);
 
@@ -67,11 +98,12 @@ export class AuthProvider extends PureComponent {
     };
 
     getContextValue = () => {
-        const { token } = this.state;
+        const { customer, token } = this.state;
 
         return {
             register: this.register.bind(this),
             login: this.login.bind(this),
+            customer,
             token
         };
     };
@@ -87,4 +119,4 @@ export class AuthProvider extends PureComponent {
     }
 }
 
-export default AuthProvider;
+export default withContexts(AuthProvider, [NextPageContext]);
