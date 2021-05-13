@@ -21,10 +21,10 @@ const _request = async (
 
     // Update the token with the one from the server
     if (isBrowser) {
-        const { [CONTEXT_TOKEN_KEY]: newContextToken } = response.headers;
+        const newToken = response.headers.get(CONTEXT_TOKEN_KEY);
 
-        if (newContextToken) {
-            BrowserDatabase.setItem(CONTEXT_TOKEN_KEY, newContextToken);
+        if (newToken) {
+            BrowserDatabase.setItem(CONTEXT_TOKEN_KEY, newToken);
         }
     }
 
