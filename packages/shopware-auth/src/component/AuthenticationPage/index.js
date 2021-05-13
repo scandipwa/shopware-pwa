@@ -1,1 +1,1 @@
-export { default } from './AuthenticationPage.component';
+export { default } from './AuthenticationPage.container';
