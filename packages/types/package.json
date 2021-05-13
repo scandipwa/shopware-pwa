@@ -1,0 +1,8 @@
+{
+    "name": "@scandipwa/types",
+    "version": "0.0.0",
+    "eslintConfig": {
+        "extends": "@scandipwa"
+    },
+    "types": "./src/typings/index.d.ts"
+}
