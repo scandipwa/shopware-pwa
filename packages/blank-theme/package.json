@@ -19,7 +19,8 @@
             "@scandipwa/seo-url-product": true,
             "@scandipwa/product": true,
             "@scandipwa/category-cms": true,
-            "@scandipwa/landing": true
+            "@scandipwa/landing": true,
+            "@scandipwa/cart": true
         }
     },
     "browserslist": {
