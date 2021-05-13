@@ -14,10 +14,10 @@ export const getHref = (relativeUrl) => {
 export class Client {
     baseHeaders = {
         'Content-Type': 'application/json',
+        'Access-Control-Expose-Headers': '*',
         'sw-access-key': SW_ACCESS_KEY
     };
 
-    // TODO add sw-context-token to the headers from a plugin
     async _request(method, url, { body, headers } = {}) {
         return fetch(url, {
             method,
