@@ -1,0 +1,13 @@
+{
+    "name": "@scandipwa/currency",
+    "version": "0.0.0",
+    "dependencies": {
+        "@scandipwa/types": "0.0.0"
+    },
+    "mosaic": {
+        "type": "extension"
+    },
+    "eslintConfig": {
+        "extends": "@scandipwa"
+    }
+}
