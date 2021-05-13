@@ -1,26 +1,13 @@
 /* eslint-disable max-lines */
-
-export interface ForeignKeys {
-  apiAlias: string
-  swagCustomizedProductsTemplateId?: string
-  swagCustomizedProductsTemplateVersionId?: string
-}
-
-export interface Extensions3 {
-  foreignKeys: ForeignKeys
-  swagCustomizedProductsTemplate?: string
-}
-
-export interface Translated3 {
-  metaDescription?: string
-  name: string
-  keywords?: string
-  description: string
-  metaTitle: string
-  packUnit?: string
-  packUnitPlural?: string
-  customFields: string[]
-}
+import { CmsPage } from '@scandipwa/cms/src/api/Cms.type';
+import {
+    ApiBase,
+    ApiBaseWithDate,
+    CustomFieldsBase,
+    Extensions,
+    TranslatableFields,
+    TranslatedFields
+} from '@scandipwa/types';
 
 export interface Price {
   net: number
@@ -46,20 +33,8 @@ export interface CheapestPriceContainer {
   value: Record<string, CheapestPrice>
   apiAlias: string
 }
-export interface Translated2 {
-  alt?: string
-  title?: string
-  customFields: string[]
-}
 
-export interface Internalmappingstorage {
-  apiAlias: string
-}
-
-export interface Extensions2 {
-  foreignKeys: Internalmappingstorage
-}
-export interface Thumbnail {
+export interface Thumbnail extends ApiBaseWithDate {
   width: number
   height: number
   url: string
@@ -67,22 +42,8 @@ export interface Thumbnail {
   customFields?: string
   _uniqueIdentifier: string
   versionId?: string
-  translated: string[]
-  createdAt: string
-  updatedAt: string
-  extensions: Extensions2
+  extensions: Extensions
   id: string
-  apiAlias: string
-}
-
-export interface Extensions {
-  internal_mapping_storage: Internalmappingstorage
-  foreignKeys: Internalmappingstorage
-}
-
-export interface Translated {
-  name: string
-  customFields: string[]
 }
 
 export interface TaxRule {
@@ -110,7 +71,7 @@ export interface CalculatedCheapestPrice {
   apiAlias: string
 }
 
-export interface CalculatedPrice {
+export interface CalculatedPrice extends ApiBase {
   unitPrice: number
   quantity: number
   totalPrice: number
@@ -118,7 +79,6 @@ export interface CalculatedPrice {
   taxRules: TaxRule[]
   referencePrice?: string
   listPrice?: string
-  apiAlias: string
 }
 
 export interface DeliveryTime {
@@ -128,15 +88,16 @@ export interface DeliveryTime {
   unit: string
   customFields?: string
   _uniqueIdentifier: string
-  versionId?: string
-  translated: Translated
+  versionId?: SVGStringList
   createdAt: string
   updatedAt: string
   extensions: Extensions
   id: string
   apiAlias: string
+  translated: TranslatedFields<Extract<keyof DeliveryTime, TranslatableFields>>
 }
-export interface Tax {
+
+export interface Tax extends ApiBase {
   taxRate: number
   name: string
   position: number
@@ -148,7 +109,6 @@ export interface Tax {
   updatedAt: string
   extensions: Extensions
   id: string
-  apiAlias: string
 }
 
 export interface MetaData {
@@ -157,7 +117,8 @@ export interface MetaData {
   height: number
 }
 
-export interface Media {
+export interface Media extends ApiBaseWithDate {
+  id: string
   mimeType: string
   fileExtension: string
   fileSize: number
@@ -174,15 +135,12 @@ export interface Media {
   customFields?: string
   _uniqueIdentifier: string
   versionId?: string
-  translated: Translated2
-  createdAt: string
-  updatedAt: string
+  translated: TranslatedFields<Extract<keyof Media, TranslatableFields>>
   extensions: Extensions
-  id: string
-  apiAlias: string
 }
 
-export interface Cover {
+export interface Cover extends ApiBaseWithDate {
+  id: string
   productId: string
   mediaId: string
   position: number
@@ -191,22 +149,70 @@ export interface Cover {
   _uniqueIdentifier: string
   versionId: string
   translated: string[]
-  createdAt: string
-  updatedAt?: string
-  extensions: Extensions2
-  id: string
+  extensions: Extensions
   productVersionId: string
-  apiAlias: string
 }
 
-export interface Product {
+export interface SeoUrls extends ApiBaseWithDate, CustomFieldsBase {
+  id: string
+  salesChannelId: string
+  languageId: string
+  foreignKey: string
+  routeName: string
+  pathInfo: string
+  seoPathInfo: string
+  isCanonical?: boolean
+  isModified?: boolean
+  isDeleted?: boolean
+  url?: string
+}
+
+export interface SeoCategory extends ApiBaseWithDate, CustomFieldsBase {
+  parentId: string
+  mediaId: string
+  name: string
+  breadcrumb: string[]
+  path: string
+  level: number
+  active: boolean
+  childCount: number
+  displayNestedProducts: boolean
+  parent?: SeoCategory
+  children?: SeoCategory
+  translations?: string[]
+  media?: Media
+  afterCategoryId: string
+  cmsPageId: string
+  cmsPage?: CmsPage
+  linkType?: string
+  linkNewTab?: string
+  internalLink?: string
+  externalLink?: string
+  visible: boolean
+  type: string
+  productAssignmentType: string
+  description: string
+  metaTitle?: string
+  metaDescription?: string
+  keywords?: string
+  seoUrls?: string
+  _uniqueIdentifier: string
+  versionId: string
+  translated: TranslatedFields<SeoCategory>
+  extensions: Extensions
+  id: string
+  parentVersionId: string
+  afterCategoryVersionId: string
+  cmsPageVersionId: string
+}
+export interface Product extends ApiBaseWithDate {
   calculatedPrices: string[]
   calculatedPrice: CalculatedPrice
   sortedProperties: string[]
   calculatedCheapestPrice: CalculatedCheapestPrice
   isNew: boolean
   calculatedMaxPurchase: number
-  seoCategory?: string
+  seoCategory?: SeoCategory
   parentId?: string
   childCount: number
   taxId: string
@@ -251,26 +257,25 @@ export interface Product {
   tax: Tax
   manufacturer?: string
   unit?: string
+  coverId: string
   cover: Cover
   parent?: string
   children?: string
-  media?: string
-  cmsPageId?: string
-  cmsPage?: string
+  cmsPageId: string
+  cmsPage?: CmsPage
   translations?: string
   categories?: string
   properties?: string
   options?: string
   configuratorSettings?: string
   categoriesRo?: string
-  coverId: string
   blacklistIds?: string
   whitelistIds?: string
   customFields: string[]
   productReviews?: string
   ratingAverage?: string
   mainCategories?: string
-  seoUrls?: string
+  seoUrls?: SeoUrls
   crossSellings?: string
   canonicalProductId?: string
   canonicalProduct?: string
@@ -278,16 +283,13 @@ export interface Product {
   streams?: string
   _uniqueIdentifier: string
   versionId: string
-  translated: Translated3
-  createdAt: string
-  updatedAt?: string
-  extensions: Extensions3
+  translated: TranslatedFields<Product>
+  extensions: Extensions
   id: string
   parentVersionId: string
   productManufacturerVersionId: string
   productMediaVersionId?: string
   cmsPageVersionId: string
-  apiAlias: string
 }
 
 export interface ProductsResult {
