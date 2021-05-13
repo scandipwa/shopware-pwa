@@ -54,6 +54,14 @@ export class Client {
             { headers }
         ));
     }
+
+    async delete(url, { body, headers } = {}) {
+        return this.parseResponse(await this._request(
+            'DELETE',
+            getHref(url),
+            { body, headers }
+        ));
+    }
 }
 
 export default new Client();

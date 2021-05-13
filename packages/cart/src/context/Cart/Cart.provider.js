@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { PureComponent } from 'react';
 
-import { addToCart, createCart } from '../../api/Cart.request';
+import { addToCart, createCart, removeFromCart } from '../../api/Cart.request';
 import { convertProductToCartItem } from '../../util/CartItem';
 import CartContext from './Cart.context';
 
@@ -40,13 +40,30 @@ export class CartProvider extends PureComponent {
         return null;
     }
 
-    async addToCart(product) {
-        const cartItem = convertProductToCartItem(product);
+    async addToCart(product, quantity = 1) {
+        const cartItem = convertProductToCartItem(product, quantity);
 
         try {
-            const cart = await addToCart({
-                items: [cartItem]
-            });
+            const cart = await addToCart({ items: [cartItem] });
+
+            this.setState({ cart });
+
+            return cart;
+        } catch (error) {
+            console.error(error);
+            // TODO notify
+        }
+
+        return null;
+    }
+
+    async removeFromCart(lineItemOrItems) {
+        const ids = Array.isArray(lineItemOrItems)
+            ? lineItemOrItems.map((item) => item.id)
+            : lineItemOrItems.id;
+
+        try {
+            const cart = await removeFromCart({ ids });
 
             this.setState({ cart });
 
