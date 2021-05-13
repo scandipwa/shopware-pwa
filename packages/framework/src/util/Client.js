@@ -12,16 +12,24 @@ export const getHref = (relativeUrl) => {
 
 /** @namespace Framework/Util/Client/Client */
 export class Client {
+    baseHeaders = {
+        'Content-Type': 'application/json',
+        'sw-access-key': SW_ACCESS_KEY
+    };
+
+    // TODO add sw-context-token to the headers from a plugin
     async _request(method, url, { body, headers } = {}) {
-        const response = await fetch(url, {
+        return fetch(url, {
             method,
             headers: {
-                'Content-Type': 'application/json',
+                ...this.baseHeaders,
                 ...headers
             },
             body: body ? JSON.stringify(body) : undefined
         });
+    }
 
+    async parseResponse(response) {
         const json = await response.json();
 
         if (response.ok) {
@@ -31,23 +39,20 @@ export class Client {
         throw json;
     }
 
-    post(url, { body, headers } = {}) {
-        return this._request(
+    async post(url, { body, headers } = {}) {
+        return this.parseResponse(await this._request(
             'POST',
             getHref(url),
-            {
-                body,
-                headers: { 'sw-access-key': SW_ACCESS_KEY, ...headers }
-            }
-        );
+            { body, headers }
+        ));
     }
 
-    get(url, { headers } = {}) {
-        return this._request(
+    async get(url, { headers } = {}) {
+        return this.parseResponse(await this._request(
             'GET',
             getHref(url),
-            { headers: { 'sw-access-key': SW_ACCESS_KEY, ...headers } }
-        );
+            { headers }
+        ));
     }
 }
 

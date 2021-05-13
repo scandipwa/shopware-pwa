@@ -13,6 +13,7 @@
             "@scandipwa/cms-product": true,
             "@scandipwa/layout": true,
             "@scandipwa/framework": true,
+            "@scandipwa/shopware-auth": true,
             "@scandipwa/seo-url-category": true,
             "@scandipwa/cms": true,
             "@scandipwa/seo-url-product": true,
