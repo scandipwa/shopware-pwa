@@ -15,10 +15,7 @@
     },
     "mosaic": {
         "type": "extension",
-        "preference": "@virtual-module/ui",
-        "extensions": {
-            "@scandipwa/framework": false
-        }
+        "preference": "@virtual-module/ui"
     },
     "eslintConfig": {
         "extends": "@scandipwa",
