@@ -7,9 +7,16 @@ import ProductCard from '../ProductCard';
 export class ProductListComponent extends PureComponent {
     static contextType = ProductListContext;
 
-    renderProduct = (product) => (
-        <ProductCard product={ product } />
-    );
+    renderProduct = (product) => {
+        const { _uniqueIdentifier } = product;
+
+        return (
+            <ProductCard
+              product={ product }
+              key={ _uniqueIdentifier }
+            />
+        );
+    };
 
     renderProducts() {
         const { products } = this.context;

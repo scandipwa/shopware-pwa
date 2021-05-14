@@ -10,6 +10,7 @@
         "type": "theme",
         "extensions": {
             "@scandipwa/seo-url": true,
+            "@scandipwa/category-product": true,
             "@scandipwa/cms-product": true,
             "@scandipwa/layout": true,
             "@scandipwa/framework": true,
@@ -47,6 +48,7 @@
     },
     "dependencies": {
         "@scandipwa/cms": "0.0.0",
+        "@scandipwa/category-product": "0.0.0",
         "@scandipwa/category-cms": "0.0.0",
         "@scandipwa/seo-url-category": "0.0.0",
         "@scandipwa/seo-url": "0.0.0",
