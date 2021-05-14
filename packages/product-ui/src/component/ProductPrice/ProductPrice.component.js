@@ -16,7 +16,7 @@ export class ProductPriceComponent extends PureComponent {
     }
 
     render() {
-        const { product: { calculatedPrice: { totalPrice } } } = this.getContextValue();
+        const { product: { product: { calculatedPrice: { totalPrice } } } } = this.getContextValue();
 
         return (
             <Typography type="caption">${ totalPrice }</Typography>

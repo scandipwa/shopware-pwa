@@ -300,3 +300,20 @@ export interface ProductsResult {
   entity: string
   elements: Product[]
 }
+
+export interface ProductConfigurator extends ApiBaseWithDate, CustomFieldsBase {
+  id: string
+  name: string
+  description?: string
+  displayType: string
+  sortingType: string
+  filterable: boolean
+  visibleOnProductDetailPage: boolean
+  position?: number
+  translated: TranslatedFields<ProductConfigurator>
+}
+
+export interface ProductContextType {
+  product: Product
+  configurator: ProductConfigurator[]
+}

@@ -27,7 +27,11 @@ export class ProductMediaComponent extends PureComponent {
     );
 
     renderThumbnails() {
-        const { product: { cover: { media: { thumbnails, translated: { title } } } } } = this.getContextValue();
+        const {
+            product: {
+                product: { cover: { media: { thumbnails, translated: { title } } } }
+            }
+        } = this.getContextValue();
         const smallThumbnail = thumbnails[thumbnails.length - 1];
 
         return (
