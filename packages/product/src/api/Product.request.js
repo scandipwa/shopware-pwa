@@ -8,7 +8,11 @@ export const DEFAULT_LIMIT = 10;
  * @namespace Product/Api/Product/Request/getProductById
  */
 export const getProductById = async (productId) => {
-    const product = await Client.post(`/store-api/product/${productId}`);
+    const product = await Client.post(`/store-api/product/${productId}`, {
+        headers: {
+            'sw-include-seo-urls': true
+        }
+    });
 
     return product;
 };
