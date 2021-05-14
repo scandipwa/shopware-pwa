@@ -16,7 +16,7 @@ export class ProductTitleComponent extends PureComponent {
     }
 
     render() {
-        const { product } = this.getContextValue();
+        const { product: { product } } = this.getContextValue();
 
         return (
             <Typography type="h1">{ getTranslatedField(product, 'name') }</Typography>

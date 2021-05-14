@@ -22,7 +22,7 @@ export class ProductBreadcrumbComponent extends PureComponent {
     );
 
     renderBreadCrumbs() {
-        const { product: { seoCategory: { breadcrumb } } } = this.getContextValue();
+        const { product: { product: { seoCategory: { breadcrumb } } } } = this.getContextValue();
 
         return (
             <div>

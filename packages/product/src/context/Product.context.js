@@ -2,9 +2,15 @@
 import { createContext } from 'react';
 
 /**
- * @type {import('react').Context<{ product?: import('../api/Product.type').Product }>}
+ * @type {import('react').Context<{ product?: import('../api/Product.type').ProductContextType }>}
  */
-const ProductContext = createContext({ product: {} });
+const ProductContext = createContext({
+    product: {
+        product: {},
+        configurator: []
+    }
+});
+
 ProductContext.displayName = 'ProductContext';
 
 export default ProductContext;
