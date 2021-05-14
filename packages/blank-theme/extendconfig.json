@@ -26,6 +26,9 @@
             ],
             "/*": [
                 "src/*"
+            ],
+            "@virtual-module/ui/*": [
+                "../material-ui"
             ]
         }
     }

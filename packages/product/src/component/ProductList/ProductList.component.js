@@ -17,7 +17,7 @@ export class ProductListComponent extends PureComponent {
     }
 
     renderContent() {
-        return this.content.render();
+        return this.renderProducts();
     }
 
     render() {

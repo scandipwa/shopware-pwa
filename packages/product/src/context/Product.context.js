@@ -5,6 +5,6 @@ import { createContext } from 'react';
  * @type {import('react').Context<{ product?: import('../api/Product.type').Product }>}
  */
 const ProductContext = createContext({ product: {} });
-ProductContext.displayName = 'CategoryContext';
+ProductContext.displayName = 'ProductContext';
 
 export default ProductContext;

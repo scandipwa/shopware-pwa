@@ -1,9 +1,20 @@
 import { createSortedRenderMap } from '@scandipwa/framework/src/util/SortedMap';
 import { PureComponent } from 'react';
 
+import ProductContext from '../../context/Product.context';
+
 /** @namespace Product/Component/ProductCard/Component/ProductCardComponent */
 export class ProductCardComponent extends PureComponent {
-    content = createSortedRenderMap({});
+    static contextType = ProductContext;
+
+    content = createSortedRenderMap({
+        test: this.renderTmpData.bind(this)
+    });
+
+    renderTmpData() {
+        const { product: { translated: { name } } } = this.context;
+        return name;
+    }
 
     renderContent() {
         return this.content.render();
