@@ -3,5 +3,13 @@
   "version": "0.0.1",
   "main": "index.js",
   "license": "MIT",
-  "private": true
+  "private": true,
+  "mosaic": {
+    "nextPages": {
+      "checkout/cart": "server"
+    }
+  },
+  "dependencies": {
+    "@scandipwa/shopware-auth": "1.0.0"
+  }
 }
