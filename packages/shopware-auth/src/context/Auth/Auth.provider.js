@@ -31,6 +31,12 @@ export class AuthProvider extends PureComponent {
         children: PropTypes.node.isRequired
     };
 
+    componentDidMount() {
+        const token = BrowserDatabase.getItem(CONTEXT_TOKEN_KEY);
+
+        this.setState({ token });
+    }
+
     register = async (formData) => {
         const {
             [NextPageContext.displayName]: {
