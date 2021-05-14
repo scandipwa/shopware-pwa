@@ -23,7 +23,7 @@ export class AddToCartContainer extends HigherOrderComponent {
             await register({ guest: true });
         }
 
-        if (!cart.token) {
+        if (!cart || !cart.token) {
             await createCart();
         }
 
