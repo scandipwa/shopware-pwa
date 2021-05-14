@@ -8,3 +8,6 @@ export const addToCart = (body) => client.post('/store-api/checkout/cart/line-it
 
 /** @namespace Cart/Api/Cart/Request/removeFromCart */
 export const removeFromCart = (body) => client.delete('/store-api/checkout/cart/line-item', { body });
+
+/** @namespace Cart/Api/Cart/Request/updateCartItems */
+export const updateCartItems = (body) => client.patch('/store-api/checkout/cart/line-item', { body });
