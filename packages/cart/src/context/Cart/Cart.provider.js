@@ -25,7 +25,7 @@ export class CartProvider extends PureComponent {
         const { cart } = this.state;
 
         if (!Object.keys(cart).length) {
-            this.state.cart = BrowserDatabase.getItem(CART);
+            this.state.cart = BrowserDatabase.getItem(CART) || {};
         }
     }
 
