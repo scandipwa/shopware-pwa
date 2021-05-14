@@ -62,6 +62,14 @@ export class Client {
             { body, headers }
         ));
     }
+
+    async patch(url, { body, headers } = {}) {
+        return this.parseResponse(await this._request(
+            'PATCH',
+            getHref(url),
+            { body, headers }
+        ));
+    }
 }
 
 export default new Client();
