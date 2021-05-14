@@ -4,6 +4,7 @@ import { PureComponent } from 'react';
 
 import { CartType } from '../../type/Cart.type';
 import CartItem from '../CartItem';
+import CartSummary from '../CartSummary';
 
 /** @namespace Cart/Component/CartPage/Component/CartPageComponent */
 export class CartPageComponent extends PureComponent {
@@ -42,7 +43,7 @@ export class CartPageComponent extends PureComponent {
     renderSummary() {
         return (
             <aside>
-                <h2>Summary</h2>
+                <CartSummary />
             </aside>
         );
     }
