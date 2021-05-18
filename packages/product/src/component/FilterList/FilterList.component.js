@@ -2,6 +2,8 @@
 import PropTypes from 'prop-types';
 import { PureComponent } from 'react';
 
+import RangeFilter from '../RangeFilter';
+import { RANGE_FILTER_TYPE } from '../RangeFilter/RangeFilter.config';
 import SelectFilter from '../SelectFilter';
 import { SELECT_FILTER_TYPE } from '../SelectFilter/SelectFilter.config';
 
@@ -26,7 +28,7 @@ export class FilterListComponent extends PureComponent {
 
     filterTypeComponentMap = {
         [SELECT_FILTER_TYPE]: SelectFilter,
-        range: this.renderFilterRangeType
+        [RANGE_FILTER_TYPE]: RangeFilter
     };
 
     renderFilterRangeType() {

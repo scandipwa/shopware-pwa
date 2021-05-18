@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { InputBaseProps } from '@material-ui/core';
 import MaterialInput from '@material-ui/core/Input';
 import { InputTextProps } from '@virtual-module/ui';
@@ -10,11 +11,13 @@ export class InputTextComponent extends PureComponent<Omit<InputTextProps, 'name
             type,
             onChange,
             inputProps,
-            placeholder
+            placeholder,
+            ...restProps
         } = this.props;
 
         return (
             <MaterialInput
+              { ...restProps }
               type={ type }
               onChange={ onChange }
               placeholder={ placeholder }

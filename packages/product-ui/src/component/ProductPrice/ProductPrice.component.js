@@ -18,8 +18,13 @@ export class ProductPriceComponent extends PureComponent {
     render() {
         const { product: { product: { calculatedPrice: { totalPrice } } } } = this.getContextValue();
 
+        // TODO: currency should come from a different module
+        // TODO: price should come from a different module
+
         return (
-            <Typography type="caption">${ totalPrice }</Typography>
+            <Typography type="caption">
+                ${ totalPrice }
+            </Typography>
         );
     }
 }

@@ -20,15 +20,19 @@ export class PaginationContainer extends HigherOrderComponent {
 
     containerProps = () => {
         const {
+            [FilteringContext.displayName]: {
+                selectedFilters: {
+                    page
+                }
+            },
             [ProductListContext.displayName]: {
-                currentPage,
                 totalPages
             }
         } = this.props;
 
         return {
             total: totalPages,
-            current: currentPage
+            current: page
         };
     };
 
