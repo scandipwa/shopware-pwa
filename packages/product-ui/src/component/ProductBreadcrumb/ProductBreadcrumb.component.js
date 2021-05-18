@@ -4,6 +4,8 @@ import ProductContext from '@scandipwa/product/src/context/Product.context';
 import Link from 'next/link';
 import { PureComponent } from 'react';
 
+// TODO: breadcrumbs should come from a different module
+
 /** @namespace Productui/Component/ProductBreadcrumb/Component/ProductBreadcrumbComponent */
 export class ProductBreadcrumbComponent extends PureComponent {
     static contextType = ProductContext;

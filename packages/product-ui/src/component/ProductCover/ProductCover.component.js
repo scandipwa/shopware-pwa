@@ -2,8 +2,8 @@
 import ProductContext from '@scandipwa/product/src/context/Product.context';
 import { PureComponent } from 'react';
 
-/** @namespace Productui/Component/ProductMedia/Component/ProductMediaComponent */
-export class ProductMediaComponent extends PureComponent {
+/** @namespace Productui/Component/ProductCover/Component/ProductCoverComponent */
+export class ProductCoverComponent extends PureComponent {
     static contextType = ProductContext;
 
     /**
@@ -29,9 +29,19 @@ export class ProductMediaComponent extends PureComponent {
     renderThumbnails() {
         const {
             product: {
-                product: { cover: { media: { thumbnails, translated: { title } } } }
+                product: {
+                    cover: {
+                        media: {
+                            thumbnails,
+                            translated: {
+                                title
+                            }
+                        }
+                    }
+                }
             }
         } = this.getContextValue();
+
         const smallThumbnail = thumbnails[thumbnails.length - 1];
 
         return (
@@ -56,4 +66,4 @@ export class ProductMediaComponent extends PureComponent {
     }
 }
 
-export default ProductMediaComponent;
+export default ProductCoverComponent;

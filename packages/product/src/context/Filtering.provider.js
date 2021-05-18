@@ -19,39 +19,68 @@ export class FilteringProvider extends ContextProvider {
 
         this.supportedProperties = {
             [PAGE_PARAM_KEY]: {
-                get: () => parseInt(this.getSearchParam(PAGE_PARAM_KEY), 10) || 1,
+                default: 1,
+                get: () => (
+                    parseInt(this.getSearchParam(PAGE_PARAM_KEY), 10)
+                    || this.supportedProperties[PAGE_PARAM_KEY].default
+                ),
+                beforeSet: () => {},
                 set: (value, isReplace) => this.setSearchParam(PAGE_PARAM_KEY, value, isReplace)
             },
             [LIMIT_PARAM_KEY]: {
-                get: () => parseInt(this.getSearchParam(LIMIT_PARAM_KEY), 10) || DEFAULT_LIMIT,
+                default: DEFAULT_LIMIT,
+                get: () => (
+                    parseInt(this.getSearchParam(LIMIT_PARAM_KEY), 10)
+                    || this.supportedProperties[LIMIT_PARAM_KEY].default
+                ),
+                // reset page on filter
+                beforeSet: (isReplace) => this._setProperty(PAGE_PARAM_KEY, 1, isReplace),
                 set: (value, isReplace) => this.setSearchParam(LIMIT_PARAM_KEY, value, isReplace)
             },
             [MIN_PRICE_PARAM_KEY]: {
-                get: () => parseFloat(this.getSearchParam(MIN_PRICE_PARAM_KEY)) || 0,
+                default: 0,
+                get: () => (
+                    parseFloat(this.getSearchParam(MIN_PRICE_PARAM_KEY))
+                    || this.supportedProperties[MIN_PRICE_PARAM_KEY].default
+                ),
+                // reset page on filter
+                beforeSet: (isReplace) => this._setProperty(PAGE_PARAM_KEY, 1, isReplace),
                 set: (value, isReplace) => this.setSearchParam(MIN_PRICE_PARAM_KEY, value, isReplace)
             },
             [MAX_PRICE_PARAM_KEY]: {
-                get: () => parseFloat(this.getSearchParam(MAX_PRICE_PARAM_KEY)) || 0,
+                default: 0,
+                get: () => (
+                    parseFloat(this.getSearchParam(MAX_PRICE_PARAM_KEY))
+                    || this.supportedProperties[MAX_PRICE_PARAM_KEY].default
+                ),
+                // reset page on filter
+                beforeSet: (isReplace) => this._setProperty(PAGE_PARAM_KEY, 1, isReplace),
                 set: (value, isReplace) => this.setSearchParam(MAX_PRICE_PARAM_KEY, value, isReplace)
             },
             [PROPERTIES_PARAM_KEY]: {
+                default: [],
                 get: () => {
                     try {
                         return this.getSearchParam(PROPERTIES_PARAM_KEY).split('|').filter(Boolean);
                     } catch (e) {
-                        return [];
+                        return this.supportedProperties[PROPERTIES_PARAM_KEY].default;
                     }
                 },
+                // reset page on filter
+                beforeSet: (isReplace) => this._setProperty(PAGE_PARAM_KEY, 1, isReplace),
                 set: (value, isReplace) => this.setSearchParam(PROPERTIES_PARAM_KEY, value.join('|'), isReplace)
             },
             [MANUFACTURER_PARAM_KEY]: {
+                default: [],
                 get: () => {
                     try {
                         return this.getSearchParam(MANUFACTURER_PARAM_KEY).split('|').filter(Boolean);
                     } catch (e) {
-                        return [];
+                        return this.supportedProperties[MANUFACTURER_PARAM_KEY].default;
                     }
                 },
+                // reset page on filter
+                beforeSet: (isReplace) => this._setProperty(PAGE_PARAM_KEY, 1, isReplace),
                 set: (value, isReplace) => this.setSearchParam(MANUFACTURER_PARAM_KEY, value.join('|'), isReplace)
             }
         };
@@ -69,6 +98,27 @@ export class FilteringProvider extends ContextProvider {
     getSearchParam(key) {
         const { router } = this.props;
         return router.query[key];
+    }
+
+    removeSearchParam(key, isReplace = false) {
+        const { router } = this.props;
+
+        const {
+            // eslint-disable-next-line no-unused-vars
+            [key]: _,
+            ...otherQuery
+        } = router.query;
+
+        const newUrl = {
+            pathname: router.pathname,
+            query: otherQuery
+        };
+
+        if (isReplace) {
+            return router.replace(newUrl, undefined, { shallow: true });
+        }
+
+        return router.push(newUrl, undefined, { shallow: true });
     }
 
     setSearchParam(key, value, isReplace = false) {
@@ -89,9 +139,36 @@ export class FilteringProvider extends ContextProvider {
         return router.push(newUrl, undefined, { shallow: true });
     }
 
-    async setProperty(key, value, isReplace = false) {
-        await this.supportedProperties[key].set(value, isReplace);
-        await this.setState({ [key]: value });
+    async _setProperty(key, newValue, isReplace = false) {
+        // always call before set routine
+        const beforeState = await this.supportedProperties[key].beforeSet() || {};
+
+        const currentValue = this.supportedProperties[key].get();
+        const defaultValue = this.supportedProperties[key].default;
+
+        const cVJ = JSON.stringify(currentValue);
+        const dVJ = JSON.stringify(defaultValue);
+        const nVJ = JSON.stringify(newValue);
+
+        if (nVJ === dVJ) {
+            if (cVJ === dVJ) {
+                // if trying to set default value
+                // while the current value is already a default value
+                // just ingore the request
+                return { ...beforeState };
+            }
+
+            await this.removeSearchParam(key, isReplace);
+            return { ...beforeState, [key]: newValue };
+        }
+
+        await this.supportedProperties[key].set(newValue, isReplace);
+        return { ...beforeState, [key]: newValue };
+    }
+
+    async setProperty(...args) {
+        const newState = await this._setProperty(...args);
+        this.setState(newState);
     }
 
     getCurrentStateFromUrl() {
@@ -102,10 +179,6 @@ export class FilteringProvider extends ContextProvider {
             }),
             {}
         );
-    }
-
-    onHistoryChange() {
-        this.setState(this.getCurrentStateFromUrl());
     }
 
     getSelectedFilters() {

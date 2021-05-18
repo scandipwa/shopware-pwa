@@ -8,7 +8,13 @@ export class ProductCardComponent extends PureComponent {
     static contextType = ProductContext;
 
     content = createSortedRenderMap({
+        test: this.renderTmpData.bind(this)
     });
+
+    renderTmpData() {
+        const { product: { translated: { name } } } = this.context;
+        return name;
+    }
 
     renderContent() {
         return this.content.render();

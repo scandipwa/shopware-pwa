@@ -1,7 +1,7 @@
 import ProductBreadcrumb from '../component/ProductBreadcrumb';
 import { PRODUCT_BREADCRUMB_KEY } from '../component/ProductBreadcrumb/ProductBreadcrumb.config';
-import ProductMedia from '../component/ProductMedia';
-import { PRODUCT_MEDIA_KEY } from '../component/ProductMedia/ProductMedia.config';
+import ProductCover from '../component/ProductCover';
+import { PRODUCT_COVER_KEY } from '../component/ProductCover/ProductCover.config';
 import ProductPrice from '../component/ProductPrice';
 import { PRODUCT_PRICE_KEY } from '../component/ProductPrice/ProductPrice.config';
 import ProductTitle from '../component/ProductTitle';
@@ -19,8 +19,8 @@ const renderProductUi = (member) => {
     );
 
     member.addItem(
-        () => <ProductMedia />,
-        PRODUCT_MEDIA_KEY
+        () => <ProductCover />,
+        PRODUCT_COVER_KEY
     );
 
     member.addItem(
