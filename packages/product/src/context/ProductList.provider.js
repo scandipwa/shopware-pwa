@@ -79,9 +79,13 @@ export class ProductListProvider extends ContextProvider {
     }
 
     componentDidUpdate() {
-        const { productsResult } = this.state;
+        const { productsResult, isLoading } = this.state;
 
-        if (productsResult && !this.getIsCurrentFilterMatchingProductsResult(productsResult)) {
+        if (
+            !isLoading
+            && productsResult
+            && !this.getIsCurrentFilterMatchingProductsResult(productsResult)
+        ) {
             this.requestProductList();
         }
     }
