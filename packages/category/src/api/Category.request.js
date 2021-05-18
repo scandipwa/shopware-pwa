@@ -7,7 +7,11 @@ import Client from '@scandipwa/framework/src/util/Client';
  * @namespace Category/Api/Category/Request/getCategoryById
  */
 export const getCategoryById = async (categoryId) => {
-    const category = await Client.post(`/store-api/category/${categoryId}`);
+    const category = await Client.post(`/store-api/category/${categoryId}`, {
+        headers: {
+            'sw-include-seo-urls': true
+        }
+    });
 
     return category;
 };

@@ -1,3 +1,5 @@
+import { SeoUrl } from '@scandipwa/seo-url/src/api/SeoUrl.type';
+
 import { CmsPage, Media } from './Page.type';
 
 export interface Category {
@@ -27,7 +29,7 @@ export interface Category {
     metaTitle?: string
     metaDescription?: string
     keywords?: string
-    seoUrls?: Record<string, unknown>
+    seoUrls?: SeoUrl[]
     versionId: string
     translated: {
         breadcrumb: string[]
