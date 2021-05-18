@@ -21,7 +21,8 @@
             "@scandipwa/product": true,
             "@scandipwa/product-ui": true,
             "@scandipwa/category-cms": true,
-            "@scandipwa/landing": true
+            "@scandipwa/landing": true,
+            "@scandipwa/product-breadcrumb": true
         }
     },
     "browserslist": {
@@ -59,6 +60,7 @@
         "@scandipwa/product-ui": "0.0.0",
         "@scandipwa/cms-product": "0.0.0",
         "@scandipwa/landing": "0.0.0",
+        "@scandipwa/product-breadcrumb": "0.0.0",
         "@tilework/mosaic": "^0.0.3",
         "@tilework/mosaic-nextjs-scripts": "^0.0.5"
     }
