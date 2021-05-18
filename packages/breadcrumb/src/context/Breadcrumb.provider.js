@@ -40,6 +40,8 @@ export class BreadcrumbProvider extends ContextProvider {
             this.setState({
                 breadcrumbCategories: breadcrumbCategoriesFromServer
             });
+
+            return;
         }
 
         if (seoCategory && breadcrumbCategories.length === 0) {
