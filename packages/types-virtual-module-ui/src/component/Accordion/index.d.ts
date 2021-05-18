@@ -1,3 +1,5 @@
+/* eslint-disable @scandipwa/scandipwa-guidelines/use-namespace */
+
 import { PureComponent, ReactNode } from 'react';
 
 export interface AccordionProps {

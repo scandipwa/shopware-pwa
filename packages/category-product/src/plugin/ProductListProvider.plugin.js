@@ -5,34 +5,31 @@ import { ProductListProvider } from '@scandipwa/product/src/context/ProductList.
 import { getCategoryProducts } from '../api/CategoryProduct.request';
 
 const requestCategoryProductsIfPossible = (args, callback, instance) => {
-    // const { CategoryContext: { category: { id } } } = instance.props;
-    console.log(instance.props);
-    const id = 0;
+    const { CategoryContext: { category: { id } } } = instance.props;
 
     if (!id) {
         return callback(...args);
     }
 
-    const { selectedFilters } = this.context;
+    const { selectedFilters } = instance.context;
     return getCategoryProducts(id, selectedFilters);
 };
 
 const addCategoryContextIfProductListProvider = (args, callback) => {
-    const [ProviderComponent, ContextProvider] = args;
+    const [originalProps] = args;
+    const result = callback(...args);
 
-    console.log('>', ProviderComponent, '>', ProductListProvider);
-
-    if (ProviderComponent === ProductListProvider) {
-        return callback(
-            withContexts(ProviderComponent, CategoryContext),
-            ContextProvider
-        );
+    if (result.type === ProductListProvider) {
+        return withContexts(
+            (props) => callback({
+                ...originalProps,
+                ...props
+            }),
+            CategoryContext
+        )(...args);
     }
 
-    return callback(
-        ProviderComponent,
-        ContextProvider
-    );
+    return result;
 };
 
 export default {
@@ -41,7 +38,7 @@ export default {
             _requestProductList: requestCategoryProductsIfPossible
         }
     },
-    'Framework/Util/Context/withProvider': {
+    'Framework/Util/Context/withProvider/HOC': {
         function: addCategoryContextIfProductListProvider
     }
 };

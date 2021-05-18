@@ -42,7 +42,7 @@ export class ButtonContainer extends PureComponent<
 
             props.onClick = onClick;
         } else {
-            props.disabled = true
+            props.disabled = true;
         }
 
         if (isPrimary) {

@@ -10,6 +10,7 @@ export class LinkContainer extends PureComponent<LinkProps> {
 
     containerFunctions = {};
 
+    // eslint-disable-next-line max-len
     containerProps = (): Omit<LinkProps, 'to'> & { color: MaterialLinkProps['color'], href: MaterialLinkProps['href'] } => {
         const {
             children,

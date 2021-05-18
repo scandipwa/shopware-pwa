@@ -1,3 +1,5 @@
+/* eslint-disable @scandipwa/scandipwa-guidelines/use-namespace */
+
 import React, { PureComponent } from 'react';
 
 export type AllowedChildrenType = 'radio' | 'radio-group' | 'checkbox' | 'select' | 'text' | 'unknown';

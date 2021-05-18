@@ -1,3 +1,4 @@
+import { removeItemFromArrayAll } from '@scandipwa/framework/src/util/Array';
 import { withContexts } from '@scandipwa/framework/src/util/Context';
 import { HigherOrderComponent, withHOC } from '@scandipwa/framework/src/util/HOC';
 
@@ -108,15 +109,9 @@ export class FilterListContainer extends HigherOrderComponent {
                             return;
                         }
 
-                        const {
-                            // eslint-disable-next-line no-unused-vars
-                            [propertyId]: _,
-                            ...otherProperties
-                        } = currentProperties;
-
                         setProperty(
                             PROPERTIES_PARAM_KEY,
-                            otherProperties
+                            removeItemFromArrayAll(currentProperties, propertyId)
                         );
                     },
                     options: property.options.map((option) => ({
@@ -174,15 +169,9 @@ export class FilterListContainer extends HigherOrderComponent {
                     return;
                 }
 
-                const {
-                    // eslint-disable-next-line no-unused-vars
-                    [manufacturerId]: _,
-                    ...otherManufacturers
-                } = currentManufacturers;
-
                 setProperty(
                     MANUFACTURER_PARAM_KEY,
-                    otherManufacturers
+                    removeItemFromArrayAll(currentManufacturers, manufacturerId)
                 );
             },
             options: entities.map((manufacturer) => ({

@@ -1,9 +1,8 @@
 /* eslint-disable react/destructuring-assignment */
 // TODO: remove CategoryContext from here, it should come from a different module!
-import CategoryContext from '@scandipwa/category/src/context/Category.context';
 import { arrayCompare } from '@scandipwa/framework/src/util/Compare';
 
-import { ContextProvider, withContexts, withProvider } from '../../../framework/src/util/Context';
+import { ContextProvider, withProvider } from '../../../framework/src/util/Context';
 import { getProducts } from '../api/Product.request';
 import FilteringContext from './Filtering.context';
 import {
@@ -79,6 +78,14 @@ export class ProductListProvider extends ContextProvider {
         this.requestProductList();
     }
 
+    componentDidUpdate() {
+        const { productsResult } = this.state;
+
+        if (productsResult && !this.getIsCurrentFilterMatchingProductsResult(productsResult)) {
+            this.requestProductList();
+        }
+    }
+
     async synchronizeUrlWithProductsResult(productsResult) {
         const { setProperty } = this.context;
 
@@ -111,12 +118,24 @@ export class ProductListProvider extends ContextProvider {
         return aggregations;
     }
 
+    getCurrentPage() {
+        const { productsResult: { page } } = this.state;
+        return page;
+    }
+
+    getTotalPages() {
+        const { productsResult: { total, limit } } = this.state;
+        return Math.ceil(total / limit);
+    }
+
     getContextValue() {
         const { isLoading } = this.state;
 
         return {
             ...super.getContextValue(),
             isLoading,
+            currentPage: this.getCurrentPage(),
+            totalPages: this.getTotalPages(),
             products: this.getProducts(),
             aggregations: this.getAggregations()
         };

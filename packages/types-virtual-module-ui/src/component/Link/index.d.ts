@@ -1,4 +1,6 @@
-import { PureComponent } from "react";
+/* eslint-disable @scandipwa/scandipwa-guidelines/use-namespace */
+
+import { PureComponent } from 'react';
 
 export interface LinkDefaultProps {
     isPrimary: boolean;

@@ -8,3 +8,4 @@ export * from './InputText';
 export * from './Link';
 export * from './ThemeProvider';
 export * from './Typography';
+export * from './Pagination';

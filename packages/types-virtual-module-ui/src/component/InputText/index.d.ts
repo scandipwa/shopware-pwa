@@ -1,5 +1,7 @@
+/* eslint-disable @scandipwa/scandipwa-guidelines/use-namespace */
 
 import { ChangeEvent, PureComponent } from 'react';
+
 import { Input } from '../../typings/input';
 
 export interface InputTextProps extends Input {

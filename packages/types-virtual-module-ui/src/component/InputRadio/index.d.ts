@@ -1,4 +1,7 @@
-import { PureComponent, ChangeEvent } from 'react';
+/* eslint-disable @scandipwa/scandipwa-guidelines/use-namespace */
+
+import { ChangeEvent, PureComponent } from 'react';
+
 import { Input } from '../../typings/input';
 
 export interface InputRadioProps extends Input {
