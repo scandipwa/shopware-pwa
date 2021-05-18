@@ -31,15 +31,9 @@ export class FilterListContainer extends HigherOrderComponent {
         this.getPriceOptions.bind(this)
     ];
 
-    onPriceRangeChange = (selectedMin, selectedMax) => {
-        const {
-            FilteringContext: {
-                setProperty
-            }
-        } = this.props;
-
-        setProperty(MIN_PRICE_PARAM_KEY, selectedMin);
-        setProperty(MAX_PRICE_PARAM_KEY, selectedMax);
+    onPriceRangeChange = (key, value) => {
+        const { FilteringContext: { setProperty } } = this.props;
+        setProperty(key, +value);
     };
 
     getPriceOptions() {

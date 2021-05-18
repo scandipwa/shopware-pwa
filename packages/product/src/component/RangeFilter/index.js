@@ -1,1 +1,1 @@
-export { default } from './SelectFilter.component';
+export { default } from './RangeFilter.container';

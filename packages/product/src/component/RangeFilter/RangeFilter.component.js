@@ -1,4 +1,4 @@
-import { Accordion, InputCheckbox } from '@virtual-module/ui';
+import { Accordion, InputText } from '@virtual-module/ui';
 import PropTypes from 'prop-types';
 import { PureComponent } from 'react';
 
@@ -18,30 +18,71 @@ export class RangeFilterComponent extends PureComponent {
                 label: PropTypes.string,
                 isSelected: PropTypes.bool
             }))
-        }).isRequired
+        }).isRequired,
+        min: PropTypes.shape({
+            value: PropTypes.oneOfType([
+                PropTypes.string,
+                PropTypes.number
+            ]),
+            label: PropTypes.string,
+            isSelected: PropTypes.bool
+        }).isRequired,
+        max: PropTypes.shape({
+            value: PropTypes.oneOfType([
+                PropTypes.string,
+                PropTypes.number
+            ]),
+            label: PropTypes.string,
+            isSelected: PropTypes.bool
+        }).isRequired,
+        onMinChange: PropTypes.func.isRequired,
+        onMaxChange: PropTypes.func.isRequired
     };
 
-    renderOption = (option) => {
-        const { value, label, isSelected } = option;
-        const { filter: { onChange } } = this.props;
+    renderMin() {
+        const {
+            min: {
+                label,
+                value
+            },
+            onMinChange
+        } = this.props;
 
         return (
-            <InputCheckbox
-              key={ value }
-              label={ label }
-              // eslint-disable-next-line react/jsx-no-bind
-              onChange={ () => onChange(value) }
-              checked={ isSelected }
+            <InputText
+              placeholder={ label }
+              value={ value }
+              onChange={ onMinChange }
             />
         );
-    };
-
-    renderDetails() {
-        const { filter: { options } } = this.props;
-        return options.map(this.renderOption);
     }
 
-    // izdomat kur ir etikas dilema, iespejamiba ???
+    renderMax() {
+        const {
+            max: {
+                label,
+                value
+            },
+            onMaxChange
+        } = this.props;
+
+        return (
+            <InputText
+              placeholder={ label }
+              value={ value }
+              onChange={ onMaxChange }
+            />
+        );
+    }
+
+    renderDetails() {
+        return (
+            <>
+                { this.renderMin() }
+                { this.renderMax() }
+            </>
+        );
+    }
 
     renderSummary() {
         const { filter: { label } } = this.props;
@@ -62,4 +103,4 @@ export class RangeFilterComponent extends PureComponent {
     }
 }
 
-export default SelectFilterComponent;
+export default RangeFilterComponent;
