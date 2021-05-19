@@ -23,6 +23,7 @@ export class ProductCoverComponent extends PureComponent {
           srcSet={ thumbnail.url }
           width={ thumbnail.width }
           height={ thumbnail.height }
+          media={ `(min-width: ${thumbnail.width}px)` }
         />
     );
 
@@ -43,10 +44,11 @@ export class ProductCoverComponent extends PureComponent {
         } = this.getContextValue();
 
         const smallThumbnail = thumbnails[thumbnails.length - 1];
+        const sortedThumbnails = thumbnails.sort((a, b) => b.width - a.width);
 
         return (
             <picture>
-                { thumbnails.map(this.renderThumbnail) }
+                { sortedThumbnails.map(this.renderThumbnail) }
                 <img
                   src={ smallThumbnail.url }
                   width={ smallThumbnail.width }
