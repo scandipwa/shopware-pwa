@@ -2,7 +2,7 @@
 import { withRouter } from 'next/router';
 
 import { ContextProvider, withProvider } from '../../../framework/src/util/Context';
-import { DEFAULT_LIMIT } from '../api/Product.request';
+import { DEFAULT_LIMIT, DEFAULT_SORT } from '../api/Product.request';
 import FilteringContext from './Filtering.context';
 
 export const PAGE_PARAM_KEY = 'page';
@@ -11,6 +11,7 @@ export const PROPERTIES_PARAM_KEY = 'properties';
 export const MANUFACTURER_PARAM_KEY = 'manufacturer';
 export const MIN_PRICE_PARAM_KEY = 'min-price';
 export const MAX_PRICE_PARAM_KEY = 'max-price';
+export const SORT_PARAM_KEY = 'order';
 
 /** @namespace Product/Context/Filtering/Provider/FilteringProvider */
 export class FilteringProvider extends ContextProvider {
@@ -82,6 +83,16 @@ export class FilteringProvider extends ContextProvider {
                 // reset page on filter
                 beforeSet: (isReplace) => this._setProperty(PAGE_PARAM_KEY, 1, isReplace),
                 set: (value, isReplace) => this.setSearchParam(MANUFACTURER_PARAM_KEY, value.join('|'), isReplace)
+            },
+            [SORT_PARAM_KEY]: {
+                default: DEFAULT_SORT,
+                get: () => (
+                    this.getSearchParam(SORT_PARAM_KEY)
+                    || this.supportedProperties[SORT_PARAM_KEY].default
+                ),
+                // reset page on filter
+                beforeSet: (isReplace) => this._setProperty(PAGE_PARAM_KEY, 1, isReplace),
+                set: (value, isReplace) => this.setSearchParam(SORT_PARAM_KEY, value, isReplace)
             }
         };
 

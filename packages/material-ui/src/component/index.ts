@@ -11,3 +11,4 @@ export * from './ThemeProvider';
 export * from './Typography';
 export * from './Pagination';
 export * from './Chip';
+export * from './Card';
