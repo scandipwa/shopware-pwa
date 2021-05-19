@@ -1,14 +1,11 @@
-import BreadcrumbProvider from '@scandipwa/breadcrumb/src/context/Breadcrumb.provider';
+import Breadcrumb from '@scandipwa/breadcrumb/src/component/Breadcrumb';
 
-import ProductBreadcrumbComponent from '../component/ProductBreadcrumb';
 import { PRODUCT_BREADCRUMB_KEY } from '../component/ProductBreadcrumb/ProductBreadcrumb.config';
 
 const renderPBreadcrumbs = (member) => {
     member.addItem(
         () => (
-            <BreadcrumbProvider>
-                <ProductBreadcrumbComponent />
-            </BreadcrumbProvider>
+            <Breadcrumb />
         ),
         PRODUCT_BREADCRUMB_KEY
     );
