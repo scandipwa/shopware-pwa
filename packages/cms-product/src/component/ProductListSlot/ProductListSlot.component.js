@@ -2,15 +2,23 @@ import { CmsSlotComponent } from '@scandipwa/cms/src/component/CmsSlot/CmsSlot.c
 import { createSortedRenderMap } from '@scandipwa/framework/src/util/SortedMap';
 import Pagination from '@scandipwa/product/src/component/Pagination';
 import ProductList from '@scandipwa/product/src/component/ProductList';
+import Sorting from '@scandipwa/product/src/component/Sorting';
 
-import { PRODUCTS_LIST_KEY, PRODUCTS_PAGINATION_KEY } from './ProductListSlot.config';
+import { PRODUCT_STORING_KEY, PRODUCTS_LIST_KEY, PRODUCTS_PAGINATION_KEY } from './ProductListSlot.config';
 
 /** @namespace CmsProduct/Component/ProductListSlot/Component/ProductListSlotComponent */
 export class ProductListSlotComponent extends CmsSlotComponent {
     content = createSortedRenderMap({
+        [PRODUCT_STORING_KEY]: this.renderSorting.bind(this),
         [PRODUCTS_LIST_KEY]: this.renderProductList.bind(this),
         [PRODUCTS_PAGINATION_KEY]: this.renderPagination.bind(this)
     });
+
+    renderSorting() {
+        return (
+            <Sorting />
+        );
+    }
 
     renderPagination() {
         return (

@@ -1,5 +1,5 @@
 import Client from '@scandipwa/framework/src/util/Client';
-import { DEFAULT_LIMIT } from '@scandipwa/product/src/api/Product.request';
+import { DEFAULT_LIMIT, DEFAULT_SORT } from '@scandipwa/product/src/api/Product.request';
 
 /**
  * @param {object} param0
@@ -20,7 +20,7 @@ export const getCategoryProducts = async (
         'max-price': maxPrice,
         properties,
         manufacturer,
-        sort = []
+        order = DEFAULT_SORT
     } = {}
 ) => {
     const products = await Client.post(`/store-api/product-listing/${ categoryId }`, {
@@ -31,7 +31,7 @@ export const getCategoryProducts = async (
             'max-price': maxPrice,
             properties,
             manufacturer,
-            sort
+            order
         }
     });
 

@@ -106,23 +106,25 @@ export class FilterListContainer extends HigherOrderComponent {
             }
         } = this.props;
 
-        return properties.reduce((acc, property) => {
-            if (property.filterable) {
-                acc.push({
-                    label: property.translated.name,
-                    name: property.id,
-                    type: SELECT_FILTER_TYPE,
-                    onChange: this.onPropertyChange,
-                    options: property.options.map((option) => ({
-                        label: option.translated.name,
-                        value: option.id,
-                        isSelected: currentProperties.indexOf(option.id) !== -1
-                    }))
-                });
-            }
+        return properties
+            .sort(({ position: A }, { position: B }) => A - B)
+            .reduce((acc, property) => {
+                if (property.filterable) {
+                    acc.push({
+                        label: property.translated.name,
+                        name: property.id,
+                        type: SELECT_FILTER_TYPE,
+                        onChange: this.onPropertyChange,
+                        options: property.options.map((option) => ({
+                            label: option.translated.name,
+                            value: option.id,
+                            isSelected: currentProperties.indexOf(option.id) !== -1
+                        }))
+                    });
+                }
 
-            return acc;
-        }, []);
+                return acc;
+            }, []);
     }
 
     onManufacturerChange = (manufacturerId) => {

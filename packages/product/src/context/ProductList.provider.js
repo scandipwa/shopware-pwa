@@ -11,7 +11,8 @@ import {
     MAX_PRICE_PARAM_KEY,
     MIN_PRICE_PARAM_KEY,
     PAGE_PARAM_KEY,
-    PROPERTIES_PARAM_KEY
+    PROPERTIES_PARAM_KEY,
+    SORT_PARAM_KEY
 } from './Filtering.provider';
 import ProductListContext from './ProductList.context';
 
@@ -53,16 +54,18 @@ export class ProductListProvider extends ContextProvider {
         const {
             currentFilters,
             page,
-            limit
+            limit,
+            sorting
         } = productsResult;
 
         return (
-            arrayCompare(selectedFilters.manufacturer, currentFilters.manufacturer)
-            && arrayCompare(selectedFilters.properties, currentFilters.properties)
-            && selectedFilters.page === page
-            && selectedFilters.limit === limit
-            && selectedFilters['min-price'] === currentFilters.price.min
-            && selectedFilters['max-price'] === currentFilters.price.max
+            arrayCompare(selectedFilters[MANUFACTURER_PARAM_KEY], currentFilters.manufacturer)
+            && arrayCompare(selectedFilters[PROPERTIES_PARAM_KEY], currentFilters.properties)
+            && selectedFilters[PAGE_PARAM_KEY] === page
+            && selectedFilters[LIMIT_PARAM_KEY] === limit
+            && selectedFilters[SORT_PARAM_KEY] === sorting
+            && selectedFilters[MIN_PRICE_PARAM_KEY] === currentFilters.price.min
+            && selectedFilters[MAX_PRICE_PARAM_KEY] === currentFilters.price.max
         );
     }
 
@@ -93,6 +96,7 @@ export class ProductListProvider extends ContextProvider {
     async synchronizeUrlWithProductsResult(productsResult) {
         const { setProperty } = this.context;
 
+        await setProperty(SORT_PARAM_KEY, productsResult.sorting, true);
         await setProperty(LIMIT_PARAM_KEY, productsResult.limit, true);
         await setProperty(PAGE_PARAM_KEY, productsResult.page, true);
         await setProperty(PROPERTIES_PARAM_KEY, productsResult.currentFilters.properties, true);
@@ -122,14 +126,15 @@ export class ProductListProvider extends ContextProvider {
         return aggregations;
     }
 
-    getCurrentPage() {
-        const { productsResult: { page } } = this.state;
-        return page;
-    }
-
     getTotalPages() {
         const { productsResult: { total, limit } } = this.state;
         return Math.ceil(total / limit);
+    }
+
+    getSortings() {
+        const { productsResult: { availableSortings = [] } } = this.state;
+
+        return availableSortings;
     }
 
     getContextValue() {
@@ -138,7 +143,7 @@ export class ProductListProvider extends ContextProvider {
         return {
             ...super.getContextValue(),
             isLoading,
-            currentPage: this.getCurrentPage(),
+            sortings: this.getSortings(),
             totalPages: this.getTotalPages(),
             products: this.getProducts(),
             aggregations: this.getAggregations()

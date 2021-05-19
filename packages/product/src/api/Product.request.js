@@ -36,7 +36,7 @@ export const getProducts = async ({
     'max-price': maxPrice,
     properties,
     manufacturer,
-    sort = DEFAULT_SORT
+    order = DEFAULT_SORT
 } = {}) => {
     const products = await Client.post('/store-api/product', {
         body: {
@@ -46,7 +46,7 @@ export const getProducts = async ({
             'max-price': maxPrice,
             properties,
             manufacturer,
-            sort
+            order
         }
     });
 

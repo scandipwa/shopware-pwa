@@ -1,5 +1,5 @@
 import { SelectProps } from '@material-ui/core';
-import { InputSelectProps, InputSelectOption } from '@virtual-module/ui';
+import { InputSelectOption, InputSelectProps } from '@virtual-module/ui';
 import { PureComponent } from 'react';
 
 import InputSelect from './InputSelect.component';

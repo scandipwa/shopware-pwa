@@ -92,7 +92,7 @@ export class FilteringProvider extends ContextProvider {
                 ),
                 // reset page on filter
                 beforeSet: (isReplace) => this._setProperty(PAGE_PARAM_KEY, 1, isReplace),
-                set: (value, isReplace) => this.setSearchParam(PAGE_PARAM_KEY, value, isReplace)
+                set: (value, isReplace) => this.setSearchParam(SORT_PARAM_KEY, value, isReplace)
             }
         };
 
