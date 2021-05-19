@@ -33,6 +33,10 @@ const requestCategoryProductsIfPossible = async (args, callback, instance) => {
 
     const { context, state } = instance;
 
+    if (!context.props.product) {
+        return;
+    }
+
     if (!getIsCurrentBreadcrumbCategoriesMatchingProductBreadcrumbCategories({ state, context })) {
         instance.requestBreadcrumbCategories();
     }
