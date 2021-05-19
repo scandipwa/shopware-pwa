@@ -1,7 +1,7 @@
 /* eslint-disable @scandipwa/scandipwa-guidelines/jsx-no-conditional,react/jsx-one-expression-per-line, @scandipwa/scandipwa-guidelines/only-render-in-component */
 import BreadcrumbContext from '@scandipwa/breadcrumb/src/context/Breadcrumb.context';
 import { getTranslatedField } from '@scandipwa/framework/src/util/GetTranslatedField';
-import Link from 'next/link';
+import { Breadcrumb } from '@virtual-module/ui';
 import { PureComponent } from 'react';
 
 /** @namespace ProductBreadcrumb/Component/ProductBreadcrumb/Component/ProductBreadcrumbComponent */
@@ -15,54 +15,19 @@ export class ProductBreadcrumbComponent extends PureComponent {
         return this.context;
     }
 
-    /**
-     * @param {import('@scandipwa/category/src/api/Category.type').Category} breadcrumbCategory
-     */
-    getBreadcrumbUrl(breadcrumbCategory) {
-        const { seoPathInfo } = breadcrumbCategory.seoUrls[0];
-
-        return seoPathInfo;
-    }
-
-    /**
-     * @param {import('@scandipwa/category/src/api/Category.type').Category} breadcrumbCategory
-     */
-    renderBreadCrumbLink(breadcrumbCategory) {
-        return (
-            <Link
-              href={ this.getBreadcrumbUrl(breadcrumbCategory) }
-            >
-                { getTranslatedField(breadcrumbCategory, 'name') }
-            </Link>
-        );
-    }
-
-    /**
-     * @param {import('@scandipwa/category/src/api/Category.type').Category} breadcrumbCategory
-     */
-    renderBreadCrumb = (breadcrumbCategory, i) => (
-            <li key={ i } style={ { marginRight: '0.5rem' } }>
-                { i === 0 ? '' : '/' } { this.renderBreadCrumbLink(breadcrumbCategory) }
-            </li>
-    );
-
     renderBreadCrumbs() {
         const { breadcrumbCategories } = this.getContextValue();
 
-        const filteredBreadCrumbs = breadcrumbCategories.filter((category) => {
-            if (!category.seoUrls) {
-                return false;
-            }
-
-            return true;
-        });
+        /**
+         * @type {import('@virtual-module/ui').BreadcrumbItem[]}
+         */
+        const breadcrumbs = breadcrumbCategories.map((category) => ({
+            label: getTranslatedField(category, 'name'),
+            href: category.seoUrls ? category.seoUrls[0].seoPathInfo : null
+        }));
 
         return (
-            <div>
-                <ul style={ { display: 'flex', listStyleType: 'none', padding: 0 } }>
-                    { filteredBreadCrumbs.map(this.renderBreadCrumb) }
-                </ul>
-            </div>
+            <Breadcrumb breadcrumbs={ breadcrumbs } />
         );
     }
 
