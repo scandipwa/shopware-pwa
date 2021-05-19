@@ -23,7 +23,7 @@ export class ProductBreadcrumbComponent extends PureComponent {
          */
         const breadcrumbs = breadcrumbCategories.map((category) => ({
             label: getTranslatedField(category, 'name'),
-            href: category.seoUrls ? category.seoUrls[0].seoPathInfo : null
+            href: category.seoUrls ? `/${category.seoUrls[0].seoPathInfo}` : null
         }));
 
         return (
