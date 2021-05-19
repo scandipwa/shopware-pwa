@@ -6,4 +6,5 @@ export interface NextPageContextType {
     product?: ProductContextType
     seoUrl?: SeoUrl
     breadcrumbCategories?: Category[]
+    category?: Category
 }
