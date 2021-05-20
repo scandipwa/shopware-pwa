@@ -1,6 +1,7 @@
 {
     "name": "@scandipwa/framework",
     "version": "0.0.0",
+    "types": "./src/typings/index.d.ts",
     "dependencies": {
         "node-fetch": "^2.6.1",
         "prop-types": "^15.7.2",
