@@ -1,3 +1,4 @@
+import { getTranslatedField } from '@scandipwa/framework/src/util/GetTranslatedField';
 import { HigherOrderComponent, withHOC } from '@scandipwa/framework/src/util/HOC';
 
 import ProductContext from '../../context/Product.context';
@@ -8,15 +9,16 @@ export class ProductCoverContainer extends HigherOrderComponent {
     static contextType = ProductContext;
 
     containerProps = () => {
+        /**
+         * @type {React.ContextType<typeof ProductContext>}
+         */
         const {
             product: {
                 cover: {
                     media: {
-                        thumbnails,
-                        translated: {
-                            title
-                        }
-                    }
+                        thumbnails
+                    },
+                    media
                 }
             }
         } = this.context;
@@ -26,7 +28,7 @@ export class ProductCoverContainer extends HigherOrderComponent {
         return {
             img,
             sources,
-            alt: title
+            alt: getTranslatedField(media, 'title')
         };
     };
 }
