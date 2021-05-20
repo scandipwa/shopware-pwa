@@ -24,8 +24,6 @@ const getIsCurrentBreadcrumbCategoriesMatchingCategoryBreadcrumbCategories = ({ 
 
     const storedCategoryIds = breadcrumbCategories.map(({ id }) => id);
 
-    console.log(storedCategoryIds, breadcrumbCategoryIds, storedCategoryIds.every((id) => breadcrumbCategoryIds.includes(id)));
-
     return arrayCompare(storedCategoryIds, breadcrumbCategoryIds);
 };
 
