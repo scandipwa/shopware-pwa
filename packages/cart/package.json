@@ -1,6 +1,6 @@
 {
   "name": "@scandipwa/cart",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "main": "index.js",
   "license": "MIT",
   "private": true,
@@ -10,6 +10,6 @@
     }
   },
   "dependencies": {
-    "@scandipwa/shopware-auth": "1.0.0"
+    "@scandipwa/auth": "0.0.0"
   }
 }

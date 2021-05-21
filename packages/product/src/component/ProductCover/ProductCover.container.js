@@ -21,6 +21,7 @@ export class ProductCoverContainer extends HigherOrderComponent {
             }
         } = this.context;
 
+        // TODO: move to product context ???
         const [img, ...sources] = thumbnails.sort(({ width: A }, { width: B }) => A - B);
 
         return {

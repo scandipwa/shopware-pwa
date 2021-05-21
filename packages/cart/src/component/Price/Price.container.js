@@ -1,6 +1,6 @@
+import ShopwareContextContext from '@scandipwa/context/src/context/ShopwareContext/ShopwareContext.context';
 import { withContexts } from '@scandipwa/framework/src/util/Context';
 import { HigherOrderComponent, withHOC } from '@scandipwa/framework/src/util/HOC';
-import { ShopwareContextContext } from '@scandipwa/shopware-auth/src/context/ShopwareContext';
 
 import PriceComponent from './Price.component';
 

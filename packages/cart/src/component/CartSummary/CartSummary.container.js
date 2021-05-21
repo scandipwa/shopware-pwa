@@ -7,15 +7,58 @@ import CartSummary from './CartSummary.component';
 
 /** @namespace Cart/Component/CartSummary/Container/CartSummaryContainer */
 export class CartSummaryContainer extends HigherOrderComponent {
-    containerProps = () => {
+    getNetTotal() {
         const {
-            [CartContext.displayName]: { cart }
+            [CartContext.displayName]: {
+                cart: {
+                    price: { netPrice = 0 } = {}
+                } = {}
+            }
         } = this.props;
 
-        return {
-            cart
-        };
-    };
+        return netPrice;
+    }
+
+    getRawTotal() {
+        const {
+            [CartContext.displayName]: {
+                cart: {
+                    price: { rawTotal = 0 } = {}
+                } = {}
+            }
+        } = this.props;
+
+        return rawTotal;
+    }
+
+    getTotalPrice() {
+        const {
+            [CartContext.displayName]: {
+                cart: {
+                    price: { totalPrice = 0 } = {}
+                } = {}
+            }
+        } = this.props;
+
+        return totalPrice;
+    }
+
+    getCalculatedTaxes() {
+        const {
+            cart: {
+                price: { calculatedTaxes = [] } = {}
+            } = {}
+        } = this.props;
+
+        return calculatedTaxes;
+    }
+
+    containerProps = () => ({
+        rawTotal: this.getRawTotal(),
+        netPrice: this.getNetTotal(),
+        getTotalPrice: this.getTotalPrice(),
+        calculatedTaxes: this.getCalculatedTaxes()
+    });
 }
 
 export default withHOC(

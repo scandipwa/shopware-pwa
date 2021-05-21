@@ -14,14 +14,9 @@ export class CartPageComponent extends PureComponent {
     };
 
     content = createSortedRenderMap([
-        this.renderHeading.bind(this),
         this.renderCartItems.bind(this),
         this.renderSummary.bind(this)
     ]);
-
-    renderHeading() {
-        return <h1>Shopping Cart</h1>;
-    }
 
     renderCartItems() {
         const { cart, isMounted } = this.props;
@@ -42,18 +37,16 @@ export class CartPageComponent extends PureComponent {
 
     renderSummary() {
         return (
-            <aside>
-                <CartSummary />
-            </aside>
+            <CartSummary />
         );
     }
 
+    renderContent() {
+        return this.content.render();
+    }
+
     render() {
-        return (
-            <main>
-                { this.content.render() }
-            </main>
-        );
+        return this.renderContent();
     }
 }
 

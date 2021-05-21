@@ -14,7 +14,6 @@ export const getHref = (relativeUrl) => {
 export class Client {
     baseHeaders = {
         'Content-Type': 'application/json',
-        'Access-Control-Expose-Headers': '*',
         'sw-access-key': SW_ACCESS_KEY
     };
 

@@ -7,16 +7,21 @@ export class ProductCoverComponent extends PureComponent {
         img: PropTypes.shape({
             id: PropTypes.string,
             url: PropTypes.string,
-            width: PropTypes.string,
-            height: PropTypes.string
+            width: PropTypes.number,
+            height: PropTypes.number
         }).isRequired,
         sources: PropTypes.arrayOf(PropTypes.shape({
             id: PropTypes.string,
             url: PropTypes.string,
-            width: PropTypes.string,
-            height: PropTypes.string
+            width: PropTypes.number,
+            height: PropTypes.number
         })).isRequired,
-        alt: PropTypes.string.isRequired
+        // eslint-disable-next-line react/forbid-prop-types
+        alt: PropTypes.any
+    };
+
+    static defaultProps = {
+        alt: ''
     };
 
     /**

@@ -1,95 +1,69 @@
-// import PropTypes from 'prop-types';
 import { createSortedRenderMap } from '@scandipwa/framework/src/util/SortedMap';
+import PropTypes from 'prop-types';
 import { PureComponent } from 'react';
 
-import { CartType } from '../../type/Cart.type';
+import CartCalculatedTax from '../CartCalculatedTax/CartCalculatedTax.component';
 import Price from '../Price';
 
 /** @namespace Cart/Component/CartSummary/Component/CartSummaryComponent */
 export class CartSummaryComponent extends PureComponent {
     static propTypes = {
-        cart: CartType.isRequired
+        rawTotal: PropTypes.number.isRequired,
+        netPrice: PropTypes.number.isRequired,
+        totalPrice: PropTypes.number.isRequired,
+        calculatedTaxes: PropTypes.arrayOf(PropTypes.shape({
+            tax: PropTypes.number,
+            taxRate: PropTypes.string
+        })).isRequired
     };
 
     content = createSortedRenderMap([
-        this.renderTotal.bind(this),
+        this.renderRawTotal.bind(this),
         this.renderNetTotal.bind(this),
-        this.renderTax.bind(this),
-        this.renderGrandTotal.bind(this)
+        this.renderCalculatedTaxes.bind(this),
+        this.renderTotalPrice.bind(this)
     ]);
 
-    renderTotal() {
-        const {
-            cart: {
-                price: { netPrice = 0 } = {}
-            } = {}
-        } = this.props;
+    renderRawTotal() {
+        const { rawTotal } = this.props;
 
         return (
-            <span>
-                Total&nbsp;
-                <Price amount={ netPrice } />
-            </span>
+            <Price amount={ rawTotal } />
         );
     }
 
-    renderGrandTotal() {
-        const {
-            cart: {
-                price: { totalPrice = 0 } = {}
-            } = {}
-        } = this.props;
+    renderTotalPrice() {
+        const { totalPrice } = this.props;
 
         return (
-            <span>
-                Grand Total&nbsp;
-                <Price amount={ totalPrice } />
-            </span>
+            <Price amount={ totalPrice } />
         );
     }
 
     renderNetTotal() {
-        const {
-            cart: {
-                price: { netPrice = 0 } = {}
-            } = {}
-        } = this.props;
+        const { netPrice } = this.props;
 
         return (
-            <span>
-                Net Total&nbsp;
-                <Price amount={ netPrice } />
-            </span>
+            <Price amount={ netPrice } />
         );
     }
 
-    renderTax() {
-        const {
-            cart: {
-                price: { calculatedTaxes = [] } = {}
-            } = {}
-        } = this.props;
-
+    renderCalculatedTax({ tax, taxRate }) {
         return (
-            <div>
-                { calculatedTaxes.map(({ taxRate, tax }) => (
-                    <span>
-                        Tax&nbsp;
-                        { taxRate }
-                        %&nbsp;
-                        <Price amount={ tax } />
-                    </span>
-                )) }
-            </div>
+            <CartCalculatedTax
+              tax={ tax }
+              taxRate={ taxRate }
+            />
         );
+    }
+
+    renderCalculatedTaxes() {
+        const { calculatedTaxes } = this.props;
+        return calculatedTaxes.map(this.renderCalculatedTax);
     }
 
     render() {
-        return (
-            <div block="CartSummary">
-                { this.content.render() }
-            </div>
-        );
+        return this.content.render();
     }
 }
 

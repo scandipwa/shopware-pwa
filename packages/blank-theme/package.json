@@ -10,11 +10,13 @@
         "type": "theme",
         "extensions": {
             "@scandipwa/seo-url": true,
+            "@scandipwa/context": true,
+            "@scandipwa/configuration": true,
             "@scandipwa/category-product": true,
             "@scandipwa/cms-product": true,
             "@scandipwa/layout": true,
             "@scandipwa/framework": true,
-            "@scandipwa/shopware-auth": true,
+            "@scandipwa/auth": true,
             "@scandipwa/seo-url-category": true,
             "@scandipwa/cms": true,
             "@scandipwa/seo-url-product": true,
@@ -48,6 +50,10 @@
         "access": "public"
     },
     "dependencies": {
+        "@scandipwa/context": "0.0.0",
+        "@scandipwa/configuration": "0.0.0",
+        "@scandipwa/auth": "0.0.0",
+        "@scandipwa/cart": "0.0.0",
         "@scandipwa/cms": "0.0.0",
         "@scandipwa/category-product": "0.0.0",
         "@scandipwa/category-cms": "0.0.0",

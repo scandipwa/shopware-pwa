@@ -1,6 +1,6 @@
+import { AuthContext } from '@scandipwa/auth/src/context/Auth';
 import { withContexts } from '@scandipwa/framework/src/util/Context';
 import { HigherOrderComponent, withHOC } from '@scandipwa/framework/src/util/HOC';
-import { AuthContext } from '@scandipwa/shopware-auth/src/context/Auth';
 
 import CartContext from '../../context/Cart/Cart.context';
 import { CartItemType } from '../../type/Cart.type';

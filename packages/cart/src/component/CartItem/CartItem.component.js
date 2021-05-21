@@ -10,7 +10,8 @@ import RemoveFromCart from '../RemoveFromCart';
 export class CartItemComponent extends PureComponent {
     static propTypes = {
         item: CartItemType.isRequired,
-        updateItemQuantity: PropTypes.func.isRequired
+        increaseItemQty: PropTypes.func.isRequired,
+        decreaseItemQty: PropTypes.func.isRequired
     };
 
     content = createSortedRenderMap([
@@ -49,23 +50,21 @@ export class CartItemComponent extends PureComponent {
 
     renderQuantity() {
         const {
-            updateItemQuantity,
-            item: { quantity },
-            item
+            increaseItemQty,
+            decreaseItemQty,
+            item: { quantity }
         } = this.props;
 
         return (
-            <div>
-                { /* eslint-disable-next-line react/jsx-no-bind */ }
-                <button onClick={ () => updateItemQuantity(item, quantity + 1) }>+</button>
+            <>
+                <button onClick={ increaseItemQty }>+</button>
                 <input
                   type="number"
                   value={ quantity }
                   readOnly
                 />
-                { /* eslint-disable-next-line react/jsx-no-bind */ }
-                <button onClick={ () => updateItemQuantity(item, quantity - 1) }>-</button>
-            </div>
+                <button onClick={ decreaseItemQty }>-</button>
+            </>
         );
     }
 
@@ -95,12 +94,12 @@ export class CartItemComponent extends PureComponent {
         );
     }
 
+    renderContent() {
+        return this.content.render();
+    }
+
     render() {
-        return (
-            <div className="CartItem">
-                { this.content.render() }
-            </div>
-        );
+        return this.renderContent();
     }
 }
 
