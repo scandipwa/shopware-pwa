@@ -37,7 +37,6 @@ const requestCategoryProductsIfPossible = async (args, callback, instance) => {
     }
 
     if (!getIsCurrentBreadcrumbCategoriesMatchingCategoryBreadcrumbCategories({ state, context })) {
-        console.log('updating on category...');
         instance.requestBreadcrumbCategories();
     }
 };
@@ -65,8 +64,6 @@ const requestCategoryBreadcrumbCategories = async (args, callback, instance) => 
     const categories = await Promise.all(breadcrumbCategories.map((categoryId) => getCategoryById(categoryId)));
 
     categories.push(category);
-
-    console.log(category, categories);
 
     return categories;
 };
