@@ -1,41 +1,67 @@
-import { createSortedMap } from '@scandipwa/framework/src/util/SortedMap';
+import Form from '@scandipwa/framework/src/component/Form';
 import PropTypes from 'prop-types';
-
-import AbstractForm from '../AbstractForm';
+import { PureComponent } from 'react';
 
 /** @namespace Auth/Component/RegistrationForm/Component/RegistrationFormComponent */
-export class RegistrationFormComponent extends AbstractForm {
+export class RegistrationFormComponent extends PureComponent {
     static propTypes = {
         onSubmit: PropTypes.func.isRequired,
-        onFieldChange: PropTypes.func.isRequired,
-        fieldValues: PropTypes.shape({}),
-        salutationOptions: PropTypes.arrayOf(),
-        countriesOptions: PropTypes.arrayOf()
+        initialValues: PropTypes.shape({}).isRequired,
+        salutationOptions: PropTypes.arrayOf().isRequired,
+        countriesOptions: PropTypes.arrayOf().isRequired
     };
 
-    fields = createSortedMap({});
+    // eslint-disable-next-line @scandipwa/scandipwa-guidelines/only-render-in-component
+    getFields() {
+        const {
+            countriesOptions,
+            salutationOptions
+        } = this.props;
 
-    // addressBlockFields = createSortedRenderMap([
-    //     this.renderInput.bind(this, 'street', 'Street address'),
-    //     this.renderInput.bind(this, 'zipcode', 'Postal code'),
-    //     this.renderInput.bind(this, 'city', 'City'),
-    //     this.renderSelectDropdown.bind(this, 'countryId', this.props.salutationOptions)
-    // ]);
-
-    // customerBlockFields = createSortedRenderMap([
-    //     this.renderSelectDropdown.bind(this, 'salutationId', this.props.salutationOptions),
-    //     this.renderInput.bind(this, 'firstName', 'First name'),
-    //     this.renderInput.bind(this, 'lastName', 'Last name'),
-    //     this.renderInput.bind(this, 'email', 'Email'),
-    //     this.renderInput.bind(this, 'password', 'Password', 'password')
-    // ]);
-
-    renderCustomerBlock() {
-        return this.customerBlockFields.render();
+        return {
+            street: {
+                type: 'input',
+                fieldProps: { label: 'Street address' }
+            },
+            zipcode: {
+                type: 'input',
+                fieldProps: { label: 'Postal code' }
+            },
+            city: {
+                type: 'input',
+                fieldProps: { label: 'City' }
+            },
+            countryId: {
+                type: 'select',
+                inputProps: { options: countriesOptions },
+                fieldProps: { label: 'Country' }
+            },
+            salutationId: {
+                type: 'select',
+                inputProps: { options: salutationOptions },
+                fieldProps: { label: 'Salutation' }
+            },
+            firstName: {
+                type: 'input',
+                fieldProps: { label: 'First name' }
+            },
+            lastName: {
+                type: 'input',
+                fieldProps: { label: 'Last name' }
+            },
+            email: {
+                type: 'input',
+                fieldProps: { label: 'Email' }
+            },
+            password: {
+                type: 'input',
+                fieldProps: { label: 'Password' }
+            }
+        };
     }
 
-    renderAddressBlock() {
-        return this.addressBlockFields.render();
+    renderFields(fields, defaultRenderer) {
+        return Array.from(fields.entries(), defaultRenderer);
     }
 
     renderActions() {
@@ -45,17 +71,19 @@ export class RegistrationFormComponent extends AbstractForm {
     }
 
     render() {
-        const { handleSubmit } = this.props;
+        const {
+            onSubmit,
+            initialValues
+        } = this.props;
 
         return (
-            <form
-              onSubmit={ handleSubmit }
-              className="RegistrationForm"
-            >
-                { this.fieldRenderMap.render() }
-                { /* TODO Shipping and billing addresses do not match */ }
-                { this.renderActions() }
-            </form>
+            <Form
+              fieldConfiguration={ this.getFields() }
+              onFormSubmit={ onSubmit }
+              initialFieldValues={ initialValues }
+              renderActions={ this.renderActions }
+              renderFields={ this.renderFields }
+            />
         );
     }
 }

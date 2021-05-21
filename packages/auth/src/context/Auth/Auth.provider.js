@@ -1,7 +1,6 @@
 /* eslint-disable react/no-unused-state */
 import ContextContext from '@scandipwa/context/src/context/ShopwareContext/ShopwareContext.context';
 import NextPageContext from '@scandipwa/framework/src/context/NextPage.context';
-import BrowserDatabase from '@scandipwa/framework/src/util/BrowserDatabase';
 import { ContextProvider, withContexts, withProvider } from '@scandipwa/framework/src/util/Context';
 import PropTypes from 'prop-types';
 import { PureComponent } from 'react';

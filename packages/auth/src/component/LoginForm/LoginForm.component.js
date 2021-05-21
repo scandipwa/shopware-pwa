@@ -1,33 +1,49 @@
-import { createSortedRenderMap } from '@scandipwa/framework/src/util/SortedMap';
+import Form from '@scandipwa/framework/src/component/Form';
 import PropTypes from 'prop-types';
+import { PureComponent } from 'react';
 
-import AbstractForm from '../AbstractForm';
-
-/** @namespace ShopwareAuth/Component/LoginForm/Component/LoginFormComponent */
-export class LoginFormComponent extends AbstractForm {
+/** @namespace Auth/Component/LoginForm/Component/LoginFormComponent */
+export class LoginFormComponent extends PureComponent {
     static propTypes = {
-        handleSubmit: PropTypes.func.isRequired
+        onSubmit: PropTypes.func.isRequired
     };
 
-    fieldRenderMap = createSortedRenderMap([
-        this.renderInput.bind(this, 'username', 'Login'),
-        this.renderInput.bind(this, 'password', 'Password', 'password')
-    ]);
+    // eslint-disable-next-line @scandipwa/scandipwa-guidelines/only-render-in-component
+    getFields() {
+        return {
+            email: {
+                type: 'input',
+                fieldProps: { label: 'Email' }
+            },
+            password: {
+                type: 'input',
+                fieldProps: { label: 'Password' }
+            }
+        };
+    }
+
+    renderFields(fields, defaultRenderer) {
+        return Array.from(fields.entries(), defaultRenderer);
+    }
+
+    renderActions() {
+        return (
+            <button type="submit">Continue</button>
+        );
+    }
 
     render() {
-        const { handleSubmit } = this.props;
+        const {
+            onSubmit
+        } = this.props;
 
         return (
-            <form
-              onSubmit={ handleSubmit }
-              className="LoginForm"
-            >
-                <p>Login</p>
-                <div>
-                    { this.fieldRenderMap.render() }
-                </div>
-                <button type="submit">Continue</button>
-            </form>
+            <Form
+              fieldConfiguration={ this.getFields() }
+              onFormSubmit={ onSubmit }
+              renderActions={ this.renderActions }
+              renderFields={ this.renderFields }
+            />
         );
     }
 }

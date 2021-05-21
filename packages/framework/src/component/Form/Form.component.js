@@ -11,8 +11,8 @@ import {
 import PropTypes from 'prop-types';
 import { Fragment, PureComponent } from 'react';
 
-/** @namespace Auth/Component/AbstractForm/Component/AbstractFormComponent */
-export class AbstractFormComponent extends PureComponent {
+/** @namespace Framework/Component/Form/Component/FormComponent */
+export class FormComponent extends PureComponent {
     static propTypes = {
         /**
          * Correct form is:
@@ -83,7 +83,8 @@ export class AbstractFormComponent extends PureComponent {
         );
     };
 
-    onFormSubmit = () => {
+    onFormSubmit = (e) => {
+        e.preventDefault();
         const { onFormSubmit } = this.props;
         const { fieldValues } = this.state;
         onFormSubmit(fieldValues);
@@ -152,4 +153,4 @@ export class AbstractFormComponent extends PureComponent {
     }
 }
 
-export default AbstractFormComponent;
+export default FormComponent;
