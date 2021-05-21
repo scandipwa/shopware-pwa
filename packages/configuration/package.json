@@ -4,9 +4,6 @@
   "main": "index.js",
   "license": "MIT",
   "mosaic": {
-    "type": "extension",
-    "nextPages": {
-      "login": "server"
-    }
+    "type": "extension"
   }
 }

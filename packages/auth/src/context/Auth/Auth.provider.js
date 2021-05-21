@@ -2,8 +2,6 @@
 import ContextContext from '@scandipwa/context/src/context/ShopwareContext/ShopwareContext.context';
 import NextPageContext from '@scandipwa/framework/src/context/NextPage.context';
 import { ContextProvider, withContexts, withProvider } from '@scandipwa/framework/src/util/Context';
-import PropTypes from 'prop-types';
-import { PureComponent } from 'react';
 
 import { login, register } from '../../api/Auth.request';
 import AuthContext from './Auth.context';

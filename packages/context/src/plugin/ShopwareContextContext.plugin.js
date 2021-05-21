@@ -1,14 +1,14 @@
 /* eslint-disable @scandipwa/scandipwa-guidelines/jsx-no-props-destruction */
-import { ShopwareContextProvider } from '../context/ShopwareContext';
+import ContextProvider from '../context/Context/Context.provider';
 
 const SHOPWARE_CONTEXT_PROVIDER_KEY = 'SHOPWARE_CONTEXT_PROVIDER_KEY';
 
 const addContextProvider = (member) => {
     member.addItem(
         ({ children }) => (
-            <ShopwareContextProvider>
+            <ContextProvider>
                 { children }
-            </ShopwareContextProvider>
+            </ContextProvider>
         ),
         SHOPWARE_CONTEXT_PROVIDER_KEY
     );
