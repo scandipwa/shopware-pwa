@@ -12,13 +12,13 @@ export class ProductProvider extends ContextProvider {
     };
 
     getProduct() {
-        const { product: { product } } = this.props;
-        return product;
+        const { product } = this.props;
+        return product || {};
     }
 
     getConfiguration() {
-        const { product: { configurator } } = this.props;
-        return configurator;
+        const { configurator } = this.props;
+        return configurator || {};
     }
 
     getContextValue() {

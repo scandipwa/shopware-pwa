@@ -9,10 +9,10 @@ import { createContext } from 'react';
 //  *  price: Record<string, unknown>
  * }>}
  */
-const ProductContext = createContext({
+const ProductListContext = createContext({
     products: []
 });
 
-ProductContext.displayName = 'CategoryContext';
+ProductListContext.displayName = 'ProductListContext';
 
-export default ProductContext;
+export default ProductListContext;

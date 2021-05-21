@@ -1,6 +1,7 @@
 import Client from '@scandipwa/framework/src/util/Client';
 
-export const DEFAULT_LIMIT = 10;
+export const DEFAULT_LIMIT = 24;
+export const DEFAULT_SORT = 'name-asc';
 
 /**
  * @param {string} productId Product id
@@ -8,7 +9,11 @@ export const DEFAULT_LIMIT = 10;
  * @namespace Product/Api/Product/Request/getProductById
  */
 export const getProductById = async (productId) => {
-    const product = await Client.post(`/store-api/product/${productId}`);
+    const product = await Client.post(`/store-api/product/${productId}`, {
+        headers: {
+            'sw-include-seo-urls': true
+        }
+    });
 
     return product;
 };
@@ -27,20 +32,21 @@ export const getProductById = async (productId) => {
 export const getProducts = async ({
     page = 1,
     limit = DEFAULT_LIMIT,
-    aggregations = [],
-    filter = [],
-    postFilter = [],
-    sort = []
+    'min-price': minPrice,
+    'max-price': maxPrice,
+    properties,
+    manufacturer,
+    order = DEFAULT_SORT
 } = {}) => {
-    const products = await Client.post('/store-api/products', {
+    const products = await Client.post('/store-api/product', {
         body: {
-            page,
+            p: page,
             limit,
-            aggregations,
-            filter,
-            sort,
-            'post-filter': postFilter
-
+            'min-price': minPrice,
+            'max-price': maxPrice,
+            properties,
+            manufacturer,
+            order
         }
     });
 
