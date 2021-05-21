@@ -5,17 +5,11 @@ import ProductComponent from './Product.component';
 
 /** @namespace Product/Component/Product/Container/ProductContainer */
 export class ProductContainer extends HigherOrderComponent {
-    containerProps = () => {
-        const { product } = this.props;
-
-        return { product };
-    };
-
     render() {
         const { product } = this.props;
 
         return (
-            <ProductProvider value={ product }>
+            <ProductProvider product={ product }>
                 { super.render() }
             </ProductProvider>
         );

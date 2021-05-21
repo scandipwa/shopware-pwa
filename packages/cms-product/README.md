@@ -1,0 +1,2 @@
+- add implementation for CMS slot of type `product-listing`!
+- add implementation for CMS block of type `product-listing`!

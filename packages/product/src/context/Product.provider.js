@@ -11,11 +11,21 @@ export class ProductProvider extends ContextProvider {
         product: PropTypes.shape({}).isRequired
     };
 
-    getContextValue() {
+    getProduct() {
         const { product } = this.props;
+        return product || {};
+    }
+
+    getConfiguration() {
+        const { configurator } = this.props;
+        return configurator || {};
+    }
+
+    getContextValue() {
         return {
             ...super.getContextValue(),
-            product
+            product: this.getProduct(),
+            configuration: this.getConfiguration()
         };
     }
 }

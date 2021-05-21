@@ -30,6 +30,7 @@ export class ContextProvider extends PureComponent {
 
 /** @namespace Framework/Util/Context/withProvider */
 export const withProvider = (ProviderComponent, ContextProvider) => {
+    /** @namespace Framework/Util/Context/withProvider/HOC */
     const withComponent = (props) => (
         <ProviderComponent
           { ...props }

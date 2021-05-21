@@ -4,10 +4,7 @@ import { createContext } from 'react';
 import { DEFAULT_LIMIT } from '../api/Product.request';
 
 const FilteringContext = createContext({
-    filter: [],
-    postFilter: [],
-    sort: [],
-    aggregations: [],
+    properties: [],
     limit: DEFAULT_LIMIT,
     page: 1
 });

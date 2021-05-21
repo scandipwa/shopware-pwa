@@ -10,11 +10,16 @@
         "type": "theme",
         "extensions": {
             "@scandipwa/seo-url": true,
+            "@scandipwa/category-product": true,
+            "@scandipwa/cms-product": true,
             "@scandipwa/layout": true,
             "@scandipwa/framework": true,
             "@scandipwa/shopware-auth": true,
             "@scandipwa/seo-url-category": true,
             "@scandipwa/cms": true,
+            "@scandipwa/seo-url-product": true,
+            "@scandipwa/product": true,
+            "@scandipwa/product-ui": true,
             "@scandipwa/category-cms": true,
             "@scandipwa/landing": true
         }
@@ -43,11 +48,16 @@
     },
     "dependencies": {
         "@scandipwa/cms": "0.0.0",
+        "@scandipwa/category-product": "0.0.0",
         "@scandipwa/category-cms": "0.0.0",
         "@scandipwa/seo-url-category": "0.0.0",
         "@scandipwa/seo-url": "0.0.0",
         "@scandipwa/framework": "0.0.0",
         "@scandipwa/layout": "0.0.0",
+        "@scandipwa/seo-url-product": "0.0.0",
+        "@scandipwa/product": "0.0.0",
+        "@scandipwa/product-ui": "0.0.0",
+        "@scandipwa/cms-product": "0.0.0",
         "@scandipwa/landing": "0.0.0",
         "@tilework/mosaic": "^0.0.3",
         "@tilework/mosaic-nextjs-scripts": "^0.0.5"

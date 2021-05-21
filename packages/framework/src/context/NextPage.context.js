@@ -1,6 +1,8 @@
 import { createContext } from 'react';
 
-// eslint-disable-next-line @scandipwa/scandipwa-guidelines/export-level-one
-const NextPageContext = createContext({ props: {} });
+/**
+ * @type {import('react').Context<{ props?: import('../api/NextPage.type').NextPageContextType }>}
+ */
+export const NextPageContext = createContext({ props: {} });
 NextPageContext.displayName = 'NextPageProps';
 export default NextPageContext;

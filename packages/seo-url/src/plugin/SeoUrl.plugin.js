@@ -46,7 +46,7 @@ const getSeoUrlConsideringSlashes = async (seoPathInfo) => {
 };
 
 const addGetSeoUrlProps = async ([{ res, resolvedUrl }]) => {
-    const seoPathInfo = resolvedUrl.substring(1);
+    const seoPathInfo = resolvedUrl.substring(1).split('?')[0];
 
     const seoUrl = await getSeoUrlConsideringSlashes(seoPathInfo);
 
