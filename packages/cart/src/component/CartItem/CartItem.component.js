@@ -33,6 +33,7 @@ export class CartItemComponent extends PureComponent {
             }
         } = this.props;
 
+        // TODO: create cart item context
         const thumbnail = thumbnails.sort((a, b) => a.width < b.width).pop();
 
         const { url } = thumbnail;

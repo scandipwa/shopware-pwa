@@ -1,4 +1,4 @@
-import ShopwareContextContext from '@scandipwa/context/src/context/ShopwareContext/ShopwareContext.context';
+import ContextContext from '@scandipwa/context/src/context/Context/Context.context';
 import { withContexts } from '@scandipwa/framework/src/util/Context';
 import { HigherOrderComponent, withHOC } from '@scandipwa/framework/src/util/HOC';
 
@@ -8,7 +8,7 @@ import PriceComponent from './Price.component';
 export class PriceContainer extends HigherOrderComponent {
     containerProps = () => {
         const {
-            [ShopwareContextContext.displayName]: { currency },
+            [ContextContext.displayName]: { currency },
             amount
         } = this.props;
 
@@ -17,6 +17,6 @@ export class PriceContainer extends HigherOrderComponent {
 }
 
 export default withHOC(
-    withContexts(PriceContainer, [ShopwareContextContext]),
+    withContexts(PriceContainer, [ContextContext]),
     PriceComponent
 );

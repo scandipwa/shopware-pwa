@@ -6,7 +6,7 @@ import { CONTEXT_TOKEN_KEY } from '../context/Context/Context.provider';
 
 const CONTEXT_TOKEN_HEADER = 'sw-context-token';
 
-const addTokenToHeaders = (headers) => {
+const addTokenToHeaders = (headers = {}) => {
     const contextToken = BrowserDatabase.getItem(CONTEXT_TOKEN_KEY);
 
     if (contextToken) {

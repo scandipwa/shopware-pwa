@@ -28,6 +28,8 @@ export class CartPageComponent extends PureComponent {
 
         const { lineItems } = cart;
 
+        // TODO: move to CartItems component, remove markup
+
         return (
             <section>
                 { lineItems.map((item) => <CartItem key={ item.id } item={ item } />) }

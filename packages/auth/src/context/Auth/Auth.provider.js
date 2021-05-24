@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unused-state */
-import ContextContext from '@scandipwa/context/src/context/ShopwareContext/ShopwareContext.context';
+import ContextContext from '@scandipwa/context/src/context/Context/Context.context';
 import NextPageContext from '@scandipwa/framework/src/context/NextPage.context';
 import { ContextProvider, withContexts, withProvider } from '@scandipwa/framework/src/util/Context';
 
