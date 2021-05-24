@@ -9,24 +9,27 @@
     "mosaic": {
         "type": "theme",
         "extensions": {
-            "@scandipwa/seo-url": true,
+            "@scandipwa/framework": true,
+            "@scandipwa/layout": true,
             "@scandipwa/context": true,
             "@scandipwa/configuration": true,
-            "@scandipwa/category-product": true,
-            "@scandipwa/cms-product": true,
-            "@scandipwa/layout": true,
-            "@scandipwa/framework": true,
             "@scandipwa/auth": true,
-            "@scandipwa/seo-url-category": true,
-            "@scandipwa/cms": true,
-            "@scandipwa/seo-url-product": true,
-            "@scandipwa/product": true,
-            "@scandipwa/product-ui": true,
-            "@scandipwa/category-cms": true,
-            "@scandipwa/landing": true,
             "@scandipwa/cart": true,
+            "@scandipwa/cms": true,
+            "@scandipwa/cms-product": true,
+            "@scandipwa/category": true,
+            "@scandipwa/category-cms": true,
+            "@scandipwa/category-product": true,
+            "@scandipwa/category-breadcrumb": true,
+            "@scandipwa/product": true,
             "@scandipwa/product-breadcrumb": true,
-            "@scandipwa/category-breadcrumb": true
+            "@scandipwa/product-ui": true,
+            "@scandipwa/landing": true,
+            "@scandipwa/landing-cms": true,
+            "@scandipwa/seo-url": true,
+            "@scandipwa/seo-url-product": true,
+            "@scandipwa/seo-url-category": true,
+            "@scandipwa/seo-url-landing": true
         }
     },
     "browserslist": {
@@ -70,6 +73,8 @@
         "@scandipwa/landing": "0.0.0",
         "@scandipwa/product-breadcrumb": "0.0.0",
         "@scandipwa/category-breadcrumb": "0.0.0",
+        "@scandipwa/landing-cms": "0.0.0",
+        "@scandipwa/seo-url-landing": "0.0.0",
         "@tilework/mosaic": "^0.0.3",
         "@tilework/mosaic-nextjs-scripts": "^0.0.5"
     }
