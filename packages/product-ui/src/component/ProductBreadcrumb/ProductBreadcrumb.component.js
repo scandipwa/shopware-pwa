@@ -21,6 +21,7 @@ export class ProductBreadcrumbComponent extends PureComponent {
      * @param {string} breadcrumb
      */
     getBreadcrumbUrl(breadcrumb) {
+        // TODO: move this to container ???
         const { pathname } = new URL(breadcrumb.replace(/\s/i, '-'), API_ENDPOINT);
 
         return pathname;
@@ -30,15 +31,19 @@ export class ProductBreadcrumbComponent extends PureComponent {
      * @param {string} breadcrumb
      */
     renderBreadCrumb = (breadcrumb, i) => (
-            <li key={ i } style={ { marginRight: '0.5rem' } }>
-                { i === 0 ? '' : '/' } <Link href={ this.getBreadcrumbUrl(breadcrumb) }>{ breadcrumb }</Link>
-            </li>
+        <Link
+          key={ i }
+          href={ this.getBreadcrumbUrl(breadcrumb) }
+        >
+            { breadcrumb }
+        </Link>
     );
 
     renderBreadCrumbs() {
         const { product: { product: { seoCategory: { breadcrumb } } } } = this.getContextValue();
 
         const filteredBreadCrumbs = breadcrumb.filter((bc) => {
+            // TODO: move this to container ???
             const navigationUrls = ['home', 'main navigation'];
 
             if (navigationUrls.includes(bc.toLowerCase().trim())) {
@@ -48,13 +53,7 @@ export class ProductBreadcrumbComponent extends PureComponent {
             return true;
         });
 
-        return (
-            <div>
-                <ul style={ { display: 'flex', listStyleType: 'none', padding: 0 } }>
-                    { filteredBreadCrumbs.map(this.renderBreadCrumb) }
-                </ul>
-            </div>
-        );
+        return filteredBreadCrumbs.map(this.renderBreadCrumb);
     }
 
     render() {

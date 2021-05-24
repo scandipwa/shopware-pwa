@@ -1,5 +1,3 @@
-import NextPageProvider from '@scandipwa/framework/src/context/NextPage.provider';
-
 import { getSeoUrlBySeoPathInfo } from '../api/SeoUrl.request';
 import NotFoundPage from '../component/NotFoundPage';
 import SeoUrlEntityPage from '../component/SeoUrlEntityPage';
@@ -17,11 +15,9 @@ const addRenderSeoUrlEntityPage = ([props]) => {
     }
 
     return (
-        <NextPageProvider props={ props }>
-            <SeoUrlEntityPage
-              routeName={ routeName }
-            />
-        </NextPageProvider>
+        <SeoUrlEntityPage
+          routeName={ routeName }
+        />
     );
 };
 
@@ -45,7 +41,9 @@ const getSeoUrlConsideringSlashes = async (seoPathInfo) => {
     );
 };
 
-const addGetSeoUrlProps = async ([{ res, resolvedUrl }]) => {
+const addGetSeoUrlProps = async (args, callback) => {
+    const [{ res, resolvedUrl }] = args;
+
     const seoPathInfo = resolvedUrl.substring(1).split('?')[0];
 
     const seoUrl = await getSeoUrlConsideringSlashes(seoPathInfo);
@@ -58,7 +56,9 @@ const addGetSeoUrlProps = async ([{ res, resolvedUrl }]) => {
         return { props: { isNotFound: true } };
     }
 
-    return { props: { seoUrl } };
+    const { props } = await callback(...args);
+
+    return { props: { ...props, seoUrl } };
 };
 
 export default {

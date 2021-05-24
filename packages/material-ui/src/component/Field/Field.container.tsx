@@ -1,4 +1,4 @@
-import { FieldProps, AllowedChildrenType } from '@virtual-module/ui';
+import { AllowedChildrenType, FieldProps } from '@virtual-module/ui';
 import { Children, PureComponent } from 'react';
 
 import { InputCheckboxContainer } from '../InputCheckbox/InputCheckbox.container';

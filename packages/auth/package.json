@@ -1,0 +1,9 @@
+{
+  "name": "@scandipwa/auth",
+  "version": "0.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "mosaic": {
+    "type": "extension"
+  }
+}

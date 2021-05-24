@@ -17,7 +17,6 @@ export class Client {
         'sw-access-key': SW_ACCESS_KEY
     };
 
-    // TODO add sw-context-token to the headers from a plugin
     async _request(method, url, { body, headers } = {}) {
         return fetch(url, {
             method,
@@ -52,6 +51,22 @@ export class Client {
             'GET',
             getHref(url),
             { headers }
+        ));
+    }
+
+    async delete(url, { body, headers } = {}) {
+        return this.parseResponse(await this._request(
+            'DELETE',
+            getHref(url),
+            { body, headers }
+        ));
+    }
+
+    async patch(url, { body, headers } = {}) {
+        return this.parseResponse(await this._request(
+            'PATCH',
+            getHref(url),
+            { body, headers }
         ));
     }
 }
