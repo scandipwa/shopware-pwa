@@ -24,7 +24,9 @@
             "@scandipwa/product-ui": true,
             "@scandipwa/category-cms": true,
             "@scandipwa/landing": true,
-            "@scandipwa/cart": true
+            "@scandipwa/cart": true,
+            "@scandipwa/product-breadcrumb": true,
+            "@scandipwa/category-breadcrumb": true
         }
     },
     "browserslist": {
@@ -66,6 +68,8 @@
         "@scandipwa/product-ui": "0.0.0",
         "@scandipwa/cms-product": "0.0.0",
         "@scandipwa/landing": "0.0.0",
+        "@scandipwa/product-breadcrumb": "0.0.0",
+        "@scandipwa/category-breadcrumb": "0.0.0",
         "@tilework/mosaic": "^0.0.3",
         "@tilework/mosaic-nextjs-scripts": "^0.0.5"
     }

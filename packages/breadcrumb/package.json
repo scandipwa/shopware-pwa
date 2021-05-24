@@ -1,0 +1,15 @@
+{
+    "name": "@scandipwa/breadcrumb",
+    "version": "0.0.0",
+    "mosaic": {
+        "type": "extension"
+    },
+    "dependencies": {
+        "@scandipwa/category": "0.0.0",
+        "@scandipwa/product": "0.0.0",
+        "@scandipwa/framework": "0.0.0"
+    },
+    "eslintConfig": {
+        "extends": "@scandipwa"
+    }
+}
