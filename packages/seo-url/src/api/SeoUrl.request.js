@@ -5,7 +5,7 @@ import Client from '@scandipwa/framework/src/util/Client';
  * @param {number} [param0.page]
  * @param {number} [param0.limit]
  * @param {{ name: string, field: string, value: string }[]} [param0.aggregations]
- * @param {{ name: import('@scandipwa/framework').FilterTypes, field: keyof import('./SeoUrl.type').SeoUrl, value: string }[]} [param0.filter]
+ * @param {{ type: import('@scandipwa/framework').FilterTypes, field: keyof import('./SeoUrl.type').SeoUrl, value: string }[]} [param0.filter]
  * @param {{ name: string, field: string, value: string }[]} [param0.postFilter]
  * @param {{ field: string, order: string, naturalSorting: boolean }[]} [param0.sort]
  * @param {string[]} [param0.grouping] Perform groupings over certain fields
@@ -42,7 +42,7 @@ export const getSeoUrlBySeoPathInfo = async (seoPathInfo) => {
     const { elements } = await getSeoUrl({
         filter: [
             {
-                name: 'equals',
+                type: 'equals',
                 field: 'seoPathInfo',
                 value: seoPathInfo
             }

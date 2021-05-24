@@ -314,6 +314,6 @@ export interface ProductConfigurator extends ApiBaseWithDate, CustomFieldsBase {
 }
 
 export interface ProductContextType {
-  product: Product
-  configurator: ProductConfigurator[]
+  product?: Product
+  configurator?: ProductConfigurator[]
 }
